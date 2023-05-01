@@ -1,0 +1,299 @@
+\chapter{Diseño detallado}
+\label{cap:diseno-detallado}
+
+En este capítulo...
+
+\section{Dependencias y frecuencia de las extracciones de datos}
+
+Como primer paso dentro dle proceos de extracción se identificaron las
+dependencias de los sistemas origen con otros procesos, tareas o reglas de
+negocio dentro de la organizción, así como la frecuencia esperada o deseada de
+la extracción de datos. La extracción de datos se realizó con una periodicidad
+diaria; esto debido a que al tratarse del sistema principal de la institución
+financiera la información se actualizaba de manera diaria. La herramienta ETL
+nos permitió identificar aquellas tablas y campos que sufrian modificaciones, de
+tal forma que se extrajo solo la información que sufría cambios a lo largo del
+día. La extracción de datos se realizó en un horario no operativo, a fin de no
+afectar la operación de la institución; además este proceso dependía del termino
+del proceso de cierre diario de operaciones. Solamente uan vez que el proceso
+hubiera terminado comenzaba la extracción por parte de la herramienta ETL; este
+proceso contaba con una ventana de procesamiento de 5 horas. La extracci''on fue
+almacenada en la base de datos temporal dentro de la herramienta ETL.
+
+\subsection{Extracción inicial}
+
+En la extracción inicial se realizaron las siguientes transformaciones:
+
+\begin{itemize}
+\item Transformación de fecha jualiana a fecha gregoriana.
+\item Cambio en los tipos de dato al momento de almacenarlos en la tabla
+  temporal; principalmente transformación del tipo de dato \textit{char} al tipo
+  de dato \textit{varchar} y los datos númericos a decimal.
+\end{itemize}
+
+Al momento de que se terminaba la extracción de datos, se cerraba la conexión a
+la base de datos del procesador principal de transacciones bancarias a fin de
+liberar la carga de trabajo del mismo para continuar con su operación diaria.
+
+\subsection{Extracciones subsecuentes}
+
+Después de realizada la extracción inicial desde el sistema fuente y con los
+datos almacenados en el repositorio temporal, las siguientes extracciones se
+realizaron mediante extracciones incrementales con base en la adición,
+actualización o eliminación de datos de las tablas seleccionadas. Se consideró
+realizar la extracción total de los registros solo en caso de que las
+modificaciones o actualizaciones en la base de datos fueran muchas; las
+condiciones para realizar la extraccióncompleta fueron las siguientes:
+
+\begin{enumerate}
+\item Existían cambios en más del 50\% de los registros.
+\item Los registros extraídos no se encontraban actualizados o contenían
+  errores.
+\item Los registros extraídos no cuentan con la calidad necesaria.
+\end{enumerate}
+
+\subsection{Relación entre las entidades de datos}
+
+En el siguiente diagrama se puede visualizar la relación entre las diferentes
+entidades y los datos que comparten cada uno de ellos.
+
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics[width=12cm, height=3cm, scale=0.5]{Relacion_entidades.jpg}
+        \caption{Datos relacionados en las entidades.}
+    \label{fig:datos-relacionados-en-las-entidades}
+  \end{center}
+\end{figure}
+
+En la imagen podemos observar que los diferentes sistemas manejan el mismo tipo
+de información; socios, cuentas, créditos y saldos.
+
+\section{Diseño para la transformación de datos}
+
+La transformación de los datos tenía varios procesos que se deberían seguir,
+entre los cuales se encuentra la limpieza de datos, los estándares y
+procedimientos utilizados, así como las reglas de transformación definidas para
+cada uno de los sistemas destino. La transformación de los datos se realizó
+dentro de la misma base de datos de paso y se almacenó en otra instancia de esta
+misma base de datos. El siguiente diagrama muestra como se realizarón las
+transformaciones requeridas.
+
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics[width=12cm, height=3cm, scale=0.5]{Transformaciones_stage.jpg}
+    \caption{Transformaciones en base de datos temporal.}
+    \label{fig:transformaciones-en-base-de-datos-temporal}
+  \end{center}
+\end{figure}
+
+A continuación se detallan las reglas utilizadas para realizar la transfocmacón
+de datos.
+
+\subsection{Limpieza de la fuente de datos}
+
+La limpieza de la fuente de datos \textbf{NO} estaba dentro del alcance del
+proyecto; sin embargo se realizaron las transformaciones de la fuente de datos
+para realizar la limpieza de datos hacia los sistemas destino. Como parte de un
+proceso de calidad de la información y limpieza de datos se definierón los
+siguientes criterios:
+
+\begin{enumerate}
+
+\item Los nombres de los socios debían contener solamente caracteres
+  alfabéticos; no se permitieron caracteres especiales como los siguientes:
+  ``\textbackslash'', ``.'', ``\#'', ``\$'', ``\%'', ``\&''.
+
+\item Los números telefónicos debían contener solamente caracteres numéricos y
+  debían ser de 10 posisciones para teléfonos fijos y 13 posiciones para
+  teléfonos celulares.
+
+  \begin{itemize}
+  \item Si \textit{Tipo\_Telefono} $=$ Casa y Longitud $($Telefono$)$ $=$10
+    Entonces Telefono\_Casa SiNo Error
+  \item Si \textit{Celular} $=$ Casa y Longitud $($Telefono$)$ $=$ 13 Entonces
+    Telefono\_Celular SiNo Error
+  \end{itemize}
+
+\item El RFC de los socios debería ser de 10 o 13 posiciones para las personas
+  físicas y 12 posiciones para las personas morales. En caso de no contar con un
+  RFC valido, el registro era rechazado y enviado a una tabla de auditoria para
+  su corrección dentro del sistema fuente de parte del área de tecnología de la
+  compañia.
+
+\item Todos los códigos postales debían ser de cinco dígitos, en caso de existir
+  algún registro con mayor o menor número, estos debían de ser enviados a una
+  tabla de auditoria para su corrección dentro del sistema fuente. Se consideró
+  una homologación de datos para los códigos de ciudades y estados. Todos los
+  códigos de estados se homologaron a tres dígitos que corresponden a las tres
+  primeras letras de cada estado; se realizó unaexcepción para el caso de
+  Chiapas (CHS) que podría confundirse con Chihuahua (CHI).
+
+\item Las fechas se homologaron al formato yyyymmdd y no debían permitir valores
+  nulos o fechas inválidas.
+
+\end{enumerate}
+
+\subsection{Estándares y procedimientos utilizados para la interrelación de los datos}
+
+Para realizar una estandarización de los datos se creó una base de datos
+temporal que conternía la información de todos los campos con los mismos datos
+pero que su sistema origen era diferente. La creación de esta tabla temporal fue
+crear la base para generar una tabla de referencias cruzadas que representara un
+gobierno de datos o MDM (Master Data Management) por sus siglas en Inglés
+
+\subsection{Reglas utilizadas para la transformación de datos}
+
+Como regla general para todos los procesos de extracción se realizaron las
+siguientes transformaciones.
+
+\begin{itemize}
+\item Transformación de fechas julianas a fechas gregorianas en formato
+  \linebreak \mbox{yyyy/mm/dd}.
+\item Transformación de los tipos de dato origen a los tipos de la base de
+  datos stage generada en SQL Server.
+\end{itemize}
+
+Los procesos de transformación para cada destino fueron diferentes debido a las
+características de cada uno de los archivos de salida. Dichas transformaciones
+se realizaron tomando como principal fuente de datos, la base de datos temporal.
+
+\subsubsection{Sistema de reportes}
+
+\begin{itemize}
+
+\item Todos los campos de fecha que tengan un sufijo \_d deberían de ser
+  convertidas a formato de fecha $($yyyymmdd$)$ para todas las tablas de este
+  sistema. Se pobló la fecha de vencimiento \_D, tomando como base el campo
+  fecha de vencimiento de la tabla de facturación. La regla de transformación
+  que se definió fue la siguiente:
+
+\begin{verbatim}
+FEC_VENCIMIENTO_5_D = CAST(RIGHT(LTRIM(RTRIM(FEC_VENCIMIENTO_5)),2) +
+        LEFT(RIGHT(LTRIM(RTRIM(FEC_VENCIMIENTO_5)),4), 2) +
+        REPLICATE('0', 2-len(LEFT(LTRIM(RTRIM(FEC_VENCIMIENTO_5)),
+        ABS(4-len(LTRIM(RTRIM(FEC_VENCIMIENTO_5))))))) +
+        LEFT(LTRIM(RTRIM(FEC_VENCIMIENTO_5)),
+        ABS(4-len(LTRIM(RTRIM(FEC_VENCIMIENTO_5))))) AS DATETIME)
+        WHERE  FEC_VENCIMIENTO_5 > 0
+\end{verbatim}
+
+\item Para el campo Fecha de último saldo se tomó la fecha de vencimiento más
+  antigua que se tenía.
+\item Para obtener el número de créditos de un socio se realizó la siguiente
+  regla.
+
+\begin{verbatim}
+        NO_CREDITOS =  NO_CREDITOS
+        WHERE  NO_SOCIO IN NO_SOCIO de la tabla CIF_CREDITOS.
+        Si NO_CREDITOS = NULL Entonces NO_CREDITOS = 0
+\end{verbatim}
+
+\item La descripción de la información correspondiente a las garantías debía
+  de estar vacio en la tabla destino.
+
+\item Para almacenar la fecha de último monto con saldo se tomó la fecha de
+  vencimiento más antigua que se tenía para cada registro dentro de la tabla de
+  saldos \textit{LN\_SALDOS.}
+
+\item Se realizó una validación sobre el tipo de cuenta para confirmar su
+  valor $=$ 1 $($Personas físicas$)$ o 6; en estos casos se colocó un valor 20
+  dentro del campo Tipo\_producto de la tabla TA\_SALDOS.
+
+\item El número de docio para poblar la tabla TA\_SALDOS se obtuvo de la
+  tabla de cuentas por socio, pero solamente de aquellas cuentas cuyo tipo de
+  producto era 4 u 8 y que tuvieran un saldo en la tabla TA\_SALDOS.
+
+\item Se calculó el número de créditos de cada socio y este valor se grabó en
+  la tabla CIF\_INFGEN; en caso de que el número de créditos fuera nulo se
+  colocó un valor por default 0.
+
+\item Se insertó el número de socio dentro de la tabla TA\_CTAXSOCIO para
+  aquellos números de cuenta menores a 20000000000 y cuya clave de relación
+  fuera 'SOW' u 'OWN'. El número de socio eran los 10 dígitos de la derecha de
+  cada número de cuenta.
+
+\item Se definió que para el campo descripción perteneciente a la tabla
+  LN\_GARANTIAS debería poblarse con un valor NULL a pesar de tener mapeado un
+  campo del cuál se extraía la información.
+
+\item El campo Periodo de la tabla LN\_SALDOS se asignó con un valor fijo =
+  'M'.
+
+\item El campo frecuencia de la tabla LN\_SALDOS se asignó con un valor fijo
+  $=$ 30.
+
+\end{itemize}
+
+La regla de transformación que se utilizó durante la extracción.
+
+\subsubsection{Reglas para el sistema para prevención de lavado de dinero}
+
+Las reglas definidas para este sistema son las siguientes:
+
+\begin{itemize}
+\item Se definieron algunos valores estáticos para los tres primeros campos de
+  cada uno de los archivos generados; estos valores son los siguientes:
+\begin{enumerate}
+\item Valor fijo 'CMPS' para el primer campo.
+\item Valor fijo 'T' para el segundo campo.
+\item Valor fijo 'F' para el tercer campo.
+\end{enumerate}
+\item Para la generación del archivo de cuentas se tomaron solo aquellas
+  cuentas que tuvieron movimientos durante el día.
+\item Solamente se tomaron en cuenta los siguientes tipos de cuenta: Parte
+  social, cuenta mexicana, servicuenta y cuentamiga.
+\item Si el tipo CIF es una persona moral (CUTYP $=$ 5), entonces el campo
+  CompanyLegalId se pobló con dicho valor, en caso contrario se asignó un valor
+  constante vacio ``''.
+\end{itemize}
+
+\section{Arquitectura aplicativa}
+
+% TODO
+
+\section{Arquitectura de negocio}
+
+% TODO
+
+\section{Arquitectura de datos}
+
+Como se explicó en los capitulos anteriores, la institución financiera contaba
+con diferentes procesos ETL que extraían información del sistema
+principal. Estos sistemas trabajaban de manera independiente por lo que cada
+sistema destino tenía su base de datos temporal antes de enviarla a su
+destino. La arquitectura se encuentra detallada en el siguiente diagrama:
+
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics[width=12cm, height=3cm, scale=0.5]{Arquitecturadatos_actual.jpg}
+    \caption{Arquitectura de datos actual.}
+    \label{fig:arquitectura-de-datos-actual}
+  \end{center}
+\end{figure}
+
+Como se observa en la imagen anterior, existían muchas bases de datos
+intermedias entre la fuente de datos y los sistemas destino; la arquitectura
+definida dentro de este proyecto, nos permite tener una sola base de datos
+temporal, así como una sola capa de integración de datos. El siguiente diagrama
+muestra el diseño de la arquitectura desarrollada:
+
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics[width=12cm, height=3cm, scale=0.5]{Arquitectura_final.jpg}
+    \caption{Arquitectura de datos final.}
+    \label{fig:arquitectura-de-datos-final}
+  \end{center}
+\end{figure}
+
+Arquitectura\_final % ???
+
+\section{Arquitectura de infraestructura}
+
+``Diseño de arquitectura aplicativa'', ``Arquitectura de negocio'',
+``Arquitectura de datos'' y ``Arquitectura de infraestructura''
+
+\cleardoublepage
+
+%%% Local Variables:
+%%% TeX-master: "Tesis"
+%%% End:
