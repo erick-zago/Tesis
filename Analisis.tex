@@ -576,6 +576,32 @@ Del análisis realizado se identificó que el estado final del proyecto debería
 
 \section{Definición de los requerimientos}
 
+Existían varios requerimientos solicitados por los diversos colaboradores de la compañia con los cuales Accenture había conversado. Con base en las conversaciones se definieron los siguientes requerimientos tanto funcionales como técnicos.
+
+\textbf{Requerimientos funcionales}
+
+\begin{enumerate}
+\item Analizar cada uno de los datos que están siendo extraídos de los sistemas origen por cada uno de los procesos ETL implementados en el compañia.
+\item Implementar procesos de limpieza de datos durante la extracción del sistema
+\begin {itemize}
+\item Eliminación de carácteres especiales en los nombres de los usuarios.
+\item Substitución de las abreviaturas existentes en los nombres; por ejemplo: Ma; el cuál es interpretado como María.
+\item Realizar la depuración de los RFC's de los usuarios ya sea agregando o eliminando caracteres para que este sea correcto.
+\end{itemize}
+\item Realizar los siguientes procesos de transformación durante la extracción de datos del sistema origen
+\begin {itemize}
+\item Transformación del formato de fecha Juliano a formato DD/MM/AAAA.
+\item Transformación del tipo de dato ( númerico, decimal, fecha, char, bi
+\end{itemize}
+\item dentificar cada uno de las datos que son extraídos del sistema origen por medio de otras fuentes de información con la finalidad de identificar si existe una duplicidad en los procesos de extracción.
+\item Creación de un repositorio central donde sea alamacenada toda la información entraída que es requerida por los diferentes sistemas de la compañia para que desde su repositorio central se distribuya la información requerida por cada sistema.
+\item Desarrollo de criterios de unificación de la información que es estraída, esto con la finalidad de optimizar los tiempos de extracción de datos que realiza cada desarrollo ETL
+\item Se requiere que los 20 archivos planos requeridos sean originados por la herramienta ETL que se implementará
+\item Para la generación del archivo \textit{Currency_Exchange.txt} se requiere realizar la investigación del tipo de cambio de froma automática o con una interfaz gráfica en lugar de realizar la consulta y actualización de ese valor de forma manual de ese valor después de acceder al sitio del SAT.
+\item Por necesidades del negocui y debido a que dentro del plan estrátegico de la compañia est+a previto el inicio de operaciones en otros paises, será requerido el desarrollo de catálogos de información qque tengan datos y códigos sobre el tipo de moneda, ciudades, estados, paises, y códigos postales.
+\item El sistema antilavado debe realizar la carga de información contenida en los archivos planos que fueron originados con la extracción, pagos a terceros y peoplesoft  de las 08:00 horas del 
+\endênumerate}
+
 \cleardoublepage
 
 %%% Local Variables:
