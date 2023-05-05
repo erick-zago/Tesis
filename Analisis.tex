@@ -1,7 +1,7 @@
 \chapter{Análisis de requerimientos}
 \label{cap:analisis}
 
-En este capítulo...
+En este capítulo se identifica el proceso de selección de software para el proyecto así como el análisis de los requerimientos técnicos y funcionales.
 
 \section{Proceso de selección de software}
 
@@ -532,6 +532,47 @@ institución. Basados en esta recomendación la institución financiera se decid
 por esta solución para implementar sus nuevos procesos ETL.
 
 \section{Análisis de fortalezas y debilidades}
+Durante el proyecto se identificaron fortalezas así como mejoras y oportunidades de crecimiento dentro de la organización. Las fortalezas identificadas en la compañía son:
+
+\begin{itemize}
+\item Uso de una sola herramienta de ETL (Microsoft SQL 2005)
+\item Plataforma empresarial estandarizada (Microsoft)
+\item Las personas involucradas en el proyecto contaban con el conocimiento del negocio, aplicaciones y datos, necesarios para el desarrollo del mismo.
+\item Se tiene una claridad en las necesidades del negpocio e inclusive existen iniciativas de integración, limpieza e implementación de un proceso de calidad de datos.
+\end{itemize}
+
+Por otra parte se identificaron debilidades dentro de la organización que no permiten un mejor manejo de la información y explotarla de manera correcta. Dichas debilidades se mencionan a continuación:
+
+\begin{itemize}
+\item Se requería un mayor entendimiento del proceso de extracción de información
+\itme Mejorar la calidad de datos que se enviaban a los sistemas destino.
+\item No se contaba con un proceso de limpieza de datos en el sistema origen
+\item No se tenía un proceso de identificación de errores y su correspondiente solución.
+\item No se tenía un esquema de gobierno de datos ni manejo de datos maestros.
+\end{itemize}
+
+Una vez identificadas las fortalezas y debilidades dentro de la compañia a nivel funcional, también se realizó un análisis de las capacidades técnologicas con las que se contaba. Principalmente se enfocó el proyecto a las capacidades del flujo de datos, es decir, aquellas herramientas técnologicas que no permitían un flujo de datos eficiente entre en sistema central y los sistemas destino. La identificación de ventajas y desventajas dentro del flujo de datos nos permitió enfocarnos en aquellos componentes que tenían que ser atendidos de inmediato.
+
+Las desventajas identificadas en el flujo son:
+\begin{enumerate}
+\item Se contaba con múltiples procesos de extracción para obtener la misma información, ocasionando que el flujo de información entre sistemas fuera más lento.
+\item Se tenía una sobrecarga de los procesos en el sistema origen de datos.
+\item Se teanía redundancia de información; es decir, se repetía la información extraída.
+\item No se tenía un proceso estándar de calidad de los datos.
+\item No se tenía documentado el mapeo de datos entre el sistema origen y el sistema destino
+\item No se tenía definido el flujo de datos maestros comunes a todos los sistemas.
+\end{enumerate}
+
+Del análisis realizado se identificó que el estado final del proyecto debería de ser:
+
+\begin{enumerate}[a]
+\item Extracción de datos del sistema central una sola vez y con un único proceso ETL.
+\item Creación de un mapeo entre sistema origen y destino.
+\item En fases posteriores tener un esquema de manejo de datos maestros; así como limpieza y calidad en los datos extraídos y almacenados.
+\item Contar con un sistema de gobierno de datos.
+\item Establecer las bases para la creación de un modelo de inteligencia de negocios alineados al plan estrátegico de la compañia.
+\item Creación de un repositorio central de datos que alamcene toda la información extraída y que nos permita tener una arquitectura más robusta y centralizada para el manejo de información.
+\end{enumerate}
 
 \section{Definición de los requerimientos}
 
