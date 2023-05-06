@@ -545,7 +545,7 @@ Por otra parte se identificaron debilidades dentro de la organización que no pe
 
 \begin{itemize}
 \item Se requería un mayor entendimiento del proceso de extracción de información
-\itme Mejorar la calidad de datos que se enviaban a los sistemas destino.
+\item Mejorar la calidad de datos que se enviaban a los sistemas destino.
 \item No se contaba con un proceso de limpieza de datos en el sistema origen
 \item No se tenía un proceso de identificación de errores y su correspondiente solución.
 \item No se tenía un esquema de gobierno de datos ni manejo de datos maestros.
@@ -565,7 +565,7 @@ Las desventajas identificadas en el flujo son:
 
 Del análisis realizado se identificó que el estado final del proyecto debería de ser:
 
-\begin{enumerate}[a]
+\begin{enumerate}
 \item Extracción de datos del sistema central una sola vez y con un único proceso ETL.
 \item Creación de un mapeo entre sistema origen y destino.
 \item En fases posteriores tener un esquema de manejo de datos maestros; así como limpieza y calidad en los datos extraídos y almacenados.
@@ -597,10 +597,10 @@ Existían varios requerimientos solicitados por los diversos colaboradores de la
 \item Creación de un repositorio central donde sea alamacenada toda la información entraída que es requerida por los diferentes sistemas de la compañia para que desde su repositorio central se distribuya la información requerida por cada sistema.
 \item Desarrollo de criterios de unificación de la información que es estraída, esto con la finalidad de optimizar los tiempos de extracción de datos que realiza cada desarrollo ETL
 \item Se requiere que los 20 archivos planos requeridos sean originados por la herramienta ETL que se implementará
-\item Para la generación del archivo \textit{Currency_Exchange.txt} se requiere realizar la investigación del tipo de cambio de froma automática o con una interfaz gráfica en lugar de realizar la consulta y actualización de ese valor de forma manual de ese valor después de acceder al sitio del SAT.
+\item Para la generación del archivo \textit{Currency\_Exchange.txt} se requiere realizar la investigación del tipo de cambio de froma automática o con una interfaz gráfica en lugar de realizar la consulta y actualización de ese valor de forma manual de ese valor después de acceder al sitio del SAT.
 \item Por necesidades del negocui y debido a que dentro del plan estrátegico de la compañia est+a previto el inicio de operaciones en otros paises, será requerido el desarrollo de catálogos de información qque tengan datos y códigos sobre el tipo de moneda, ciudades, estados, paises, y códigos postales.
 \item El sistema antilavado debe realizar la carga de información contenida en los archivos planos que fueron originados con la extracción, pagos a terceros y peoplesoft  de las 08:00 horas del 
-\endênumerate}
+\end{enumerate}
 
 \cleardoublepage
 
