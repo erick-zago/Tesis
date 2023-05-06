@@ -532,74 +532,125 @@ institución. Basados en esta recomendación la institución financiera se decid
 por esta solución para implementar sus nuevos procesos ETL.
 
 \section{Análisis de fortalezas y debilidades}
-Durante el proyecto se identificaron fortalezas así como mejoras y oportunidades de crecimiento dentro de la organización. Las fortalezas identificadas en la compañía son:
+
+Durante el proyecto se identificaron fortalezas así como mejoras y oportunidades
+de crecimiento dentro de la organización. Las fortalezas identificadas en la
+compañía son:
 
 \begin{itemize}
-\item Uso de una sola herramienta de ETL (Microsoft SQL 2005)
-\item Plataforma empresarial estandarizada (Microsoft)
-\item Las personas involucradas en el proyecto contaban con el conocimiento del negocio, aplicaciones y datos, necesarios para el desarrollo del mismo.
-\item Se tiene una claridad en las necesidades del negpocio e inclusive existen iniciativas de integración, limpieza e implementación de un proceso de calidad de datos.
+\item Uso de una sola herramienta de ETL (Microsoft SQL 2005).
+\item Plataforma empresarial estandarizada (Microsoft).
+\item Las personas involucradas en el proyecto contaban con el conocimiento del
+  negocio, aplicaciones y datos, necesarios para el desarrollo del mismo.
+\item Se tiene una claridad en las necesidades del negpocio e inclusive existen
+  iniciativas de integración, limpieza e implementación de un proceso de calidad
+  de datos.
 \end{itemize}
 
-Por otra parte se identificaron debilidades dentro de la organización que no permiten un mejor manejo de la información y explotarla de manera correcta. Dichas debilidades se mencionan a continuación:
+Por otra parte se identificaron debilidades dentro de la organización que no
+permiten un mejor manejo de la información y explotarla de manera
+correcta. Dichas debilidades se mencionan a continuación:
 
 \begin{itemize}
-\item Se requería un mayor entendimiento del proceso de extracción de información
+\item Se requería un mayor entendimiento del proceso de extracción de
+  información
 \item Mejorar la calidad de datos que se enviaban a los sistemas destino.
-\item No se contaba con un proceso de limpieza de datos en el sistema origen
-\item No se tenía un proceso de identificación de errores y su correspondiente solución.
+\item No se contaba con un proceso de limpieza de datos en el sistema origen.
+\item No se tenía un proceso de identificación de errores y su correspondiente
+  solución.
 \item No se tenía un esquema de gobierno de datos ni manejo de datos maestros.
 \end{itemize}
 
-Una vez identificadas las fortalezas y debilidades dentro de la compañia a nivel funcional, también se realizó un análisis de las capacidades técnologicas con las que se contaba. Principalmente se enfocó el proyecto a las capacidades del flujo de datos, es decir, aquellas herramientas técnologicas que no permitían un flujo de datos eficiente entre en sistema central y los sistemas destino. La identificación de ventajas y desventajas dentro del flujo de datos nos permitió enfocarnos en aquellos componentes que tenían que ser atendidos de inmediato.
+Una vez identificadas las fortalezas y debilidades dentro de la compañia a nivel
+funcional, también se realizó un análisis de las capacidades técnologicas con
+las que se contaba. Principalmente se enfocó el proyecto a las capacidades del
+flujo de datos, es decir, aquellas herramientas técnologicas que no permitían un
+flujo de datos eficiente entre en sistema central y los sistemas destino. La
+identificación de ventajas y desventajas dentro del flujo de datos nos permitió
+enfocarnos en aquellos componentes que tenían que ser atendidos de inmediato.
 
 Las desventajas identificadas en el flujo son:
 \begin{enumerate}
-\item Se contaba con múltiples procesos de extracción para obtener la misma información, ocasionando que el flujo de información entre sistemas fuera más lento.
+\item Se contaba con múltiples procesos de extracción para obtener la misma
+  información, ocasionando que el flujo de información entre sistemas fuera más
+  lento.
 \item Se tenía una sobrecarga de los procesos en el sistema origen de datos.
-\item Se teanía redundancia de información; es decir, se repetía la información extraída.
+\item Se teanía redundancia de información; es decir, se repetía la información
+  extraída.
 \item No se tenía un proceso estándar de calidad de los datos.
-\item No se tenía documentado el mapeo de datos entre el sistema origen y el sistema destino
-\item No se tenía definido el flujo de datos maestros comunes a todos los sistemas.
+\item No se tenía documentado el mapeo de datos entre el sistema origen y el
+  sistema destino.
+\item No se tenía definido el flujo de datos maestros comunes a todos los
+  sistemas.
 \end{enumerate}
 
 Del análisis realizado se identificó que el estado final del proyecto debería de ser:
 
 \begin{enumerate}
-\item Extracción de datos del sistema central una sola vez y con un único proceso ETL.
+\item Extracción de datos del sistema central una sola vez y con un único
+  proceso ETL.
 \item Creación de un mapeo entre sistema origen y destino.
-\item En fases posteriores tener un esquema de manejo de datos maestros; así como limpieza y calidad en los datos extraídos y almacenados.
+\item En fases posteriores tener un esquema de manejo de datos maestros; así
+  como limpieza y calidad en los datos extraídos y almacenados.
 \item Contar con un sistema de gobierno de datos.
-\item Establecer las bases para la creación de un modelo de inteligencia de negocios alineados al plan estrátegico de la compañia.
-\item Creación de un repositorio central de datos que alamcene toda la información extraída y que nos permita tener una arquitectura más robusta y centralizada para el manejo de información.
+\item Establecer las bases para la creación de un modelo de inteligencia de
+  negocios alineados al plan estrátegico de la compañia.
+\item Creación de un repositorio central de datos que alamcene toda la
+  información extraída y que nos permita tener una arquitectura más robusta y
+  centralizada para el manejo de información.
 \end{enumerate}
 
 \section{Definición de los requerimientos}
 
-Existían varios requerimientos solicitados por los diversos colaboradores de la compañia con los cuales Accenture había conversado. Con base en las conversaciones se definieron los siguientes requerimientos tanto funcionales como técnicos.
+Existían varios requerimientos solicitados por los diversos colaboradores de la
+compañia con los cuales Accenture había conversado. Con base en las
+conversaciones se definieron los siguientes requerimientos tanto funcionales
+como técnicos.
 
 \textbf{Requerimientos funcionales}
 
 \begin{enumerate}
-\item Analizar cada uno de los datos que están siendo extraídos de los sistemas origen por cada uno de los procesos ETL implementados en el compañia.
-\item Implementar procesos de limpieza de datos durante la extracción del sistema
-\begin {itemize}
-\item Eliminación de carácteres especiales en los nombres de los usuarios.
-\item Substitución de las abreviaturas existentes en los nombres; por ejemplo: Ma; el cuál es interpretado como María.
-\item Realizar la depuración de los RFC's de los usuarios ya sea agregando o eliminando caracteres para que este sea correcto.
-\end{itemize}
-\item Realizar los siguientes procesos de transformación durante la extracción de datos del sistema origen
-\begin {itemize}
-\item Transformación del formato de fecha Juliano a formato DD/MM/AAAA.
-\item Transformación del tipo de dato ( númerico, decimal, fecha, char, bi
-\end{itemize}
-\item dentificar cada uno de las datos que son extraídos del sistema origen por medio de otras fuentes de información con la finalidad de identificar si existe una duplicidad en los procesos de extracción.
-\item Creación de un repositorio central donde sea alamacenada toda la información entraída que es requerida por los diferentes sistemas de la compañia para que desde su repositorio central se distribuya la información requerida por cada sistema.
-\item Desarrollo de criterios de unificación de la información que es estraída, esto con la finalidad de optimizar los tiempos de extracción de datos que realiza cada desarrollo ETL
-\item Se requiere que los 20 archivos planos requeridos sean originados por la herramienta ETL que se implementará
-\item Para la generación del archivo \textit{Currency\_Exchange.txt} se requiere realizar la investigación del tipo de cambio de froma automática o con una interfaz gráfica en lugar de realizar la consulta y actualización de ese valor de forma manual de ese valor después de acceder al sitio del SAT.
-\item Por necesidades del negocui y debido a que dentro del plan estrátegico de la compañia est+a previto el inicio de operaciones en otros paises, será requerido el desarrollo de catálogos de información qque tengan datos y códigos sobre el tipo de moneda, ciudades, estados, paises, y códigos postales.
-\item El sistema antilavado debe realizar la carga de información contenida en los archivos planos que fueron originados con la extracción, pagos a terceros y peoplesoft  de las 08:00 horas del 
+\item Analizar cada uno de los datos que están siendo extraídos de los sistemas
+  origen por cada uno de los procesos ETL implementados en el compañia.
+\item Implementar procesos de limpieza de datos durante la extracción del
+  sistema:
+  \begin {itemize}
+  \item Eliminación de carácteres especiales en los nombres de los usuarios.
+  \item Substitución de las abreviaturas existentes en los nombres; por ejemplo:
+    Ma; el cuál es interpretado como María.
+  \item Realizar la depuración de los RFCs de los usuarios ya sea agregando o
+    eliminando caracteres para que este sea correcto.
+  \end{itemize}
+\item Realizar los siguientes procesos de transformación durante la extracción
+  de datos del sistema origen:
+  \begin {itemize}
+  \item Transformación del formato de fecha Juliano a formato DD/MM/AAAA.
+  \item Transformación del tipo de dato ( númerico, decimal, fecha, char, bi
+  \end{itemize}
+\item Identificar cada uno de las datos que son extraídos del sistema origen por
+  medio de otras fuentes de información con la finalidad de identificar si
+  existe una duplicidad en los procesos de extracción.
+\item Creación de un repositorio central donde sea alamacenada toda la
+  información entraída que es requerida por los diferentes sistemas de la
+  compañia para que desde su repositorio central se distribuya la información
+  requerida por cada sistema.
+\item Desarrollo de criterios de unificación de la información que es estraída,
+  esto con la finalidad de optimizar los tiempos de extracción de datos que
+  realiza cada desarrollo ETL
+\item Se requiere que los 20 archivos planos requeridos sean originados por la
+  herramienta ETL que se implementará.
+\item Para la generación del archivo \textit{Currency\_Exchange.txt} se requiere
+  realizar la investigación del tipo de cambio de froma automática o con una
+  interfaz gráfica en lugar de realizar la consulta y actualización de ese valor
+  de forma manual de ese valor después de acceder al sitio del SAT.
+\item Por necesidades del negocio y debido a que dentro del plan estrátegico de
+  la compañia est+a previto el inicio de operaciones en otros paises, será
+  requerido el desarrollo de catálogos de información qque tengan datos y
+  códigos sobre el tipo de moneda, ciudades, estados, paises, y códigos
+  postales.
+\item El sistema antilavado debe realizar la carga de información contenida en
+  los archivos planos que fueron originados con la extracción, pagos a terceros
+  y PeopleSoft de las 08:00 horas %???
 \end{enumerate}
 
 \cleardoublepage
