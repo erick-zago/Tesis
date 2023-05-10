@@ -34,7 +34,7 @@ Este proceso se datalla en la figura~\ref{fig:proceso}:
 En las siguientes secciones se definirán cada uno de los pasos del proceso
 seguidos.
 
-\subsection{Requerimientos funcionales para selección de software}
+\subsection{Requerimientos de funcionalidad del software}
 
 Con base en las reuniones realizadas con el área de desarrollo de sistemas de la
 institución financiera se identificaron una serie de requerimientos funcionales
@@ -134,7 +134,7 @@ detallados a continuación.
   rendimiento del proceso y extrayendo una cantidad menor de datos.
 \end{itemize}
 
-\subsection{Requerimientos técnicos para selección de software}
+\subsection{Requerimientos técnicos del software}
 
 Por su parte los requerimientos técnicos solicitados por la institución para
 seleccionar la herramienta fueron los siguientes:
@@ -172,48 +172,6 @@ seleccionar la herramienta fueron los siguientes:
 Aunque el gobierno de datos no era parte del alcance del proyecto, pero si de la
 estrategia de crecimiento de la institución, la herramienta debería de soportar
 esta funcionalidad.
-
-\subsection{Requerimientos de limpieza de datos}
-
-Como parte de la definición de requerimientos funcionales que debía cumplir la
-herramienta, existe una sección que tenía que ver con la calidad y limpieza de
-datos; estos requerimientos solicitados por parte del área de tecnoloía fueron
-los siguientes:
-
-Se requería que el proceso ETL realizara la limpieza de datos de los campos
-descritos a continuación:
-
-\begin{itemize}
-
-\item RFC. Se requería que el RFC se encontrara estandarizado y cumplieran con
-  los requerimientos establecidos por el buró de crédito
-
-\item Nombres de socios. Se requería que los nombres de socios no tuvieran
-  caracteres especiales como puntos, comas, retornos de carro, paréntesis,
-  corchetes, porcentaje, comillas y caracteres de 16 bits.
-
-\item Fechas de morosidad. Se solicitó que las fechas para el cálculo de la
-  morosidad se encontraran en un formato de fecha correcto yyyymmdd y que no se
-  permitieran valores nulos o negativos para este tipo de dato.
-
-\item Direcciones de socios. Fue requerido que las direcciones de los socios
-  tuvieran una nomenclatura estándar para nombres de calles, colonias
-
-\item Ciudades/Municipios. Los códigos y nombres de ciudades y municipios debían
-  de contar con un estándar y estos deberian de estar corregidos de a cuerdo a
-  la información proporcionada por SEPOMEX.
-
-\item Teléfonos. Los teléfonos de los clientes debían contar con la clave lada y
-  todos tenían que ser de 10 dígitos para números fijos y de 13 dígitos para
-  números celulares
-
-\item Los números telefónicos no deberían de tener guiones o caracteres
-  especiales.
-\end{itemize}
-
-Como parte de la estandarización de direcciones era requerido que todos los
-códigos postales se encontraran conforme a la lista proporcionada por SEPOMEX y
-todos deberían de ser de 5 dígitos.
 
 \section{Criterios de evaluación}
 
@@ -578,7 +536,7 @@ Del análisis realizado se identificó que el estado final del proyecto debería
 
 Existían varios requerimientos solicitados por los diversos colaboradores de la compañia con los cuales Accenture había conversado. Con base en las conversaciones se definieron los siguientes requerimientos tanto funcionales como técnicos.
 
-\textbf{Requerimientos funcionales}
+\textbf{Requerimientos funcionales de negocio}
 
 \begin{enumerate}
 \item Analizar cada uno de los datos que están siendo extraídos de los sistemas origen por cada uno de los procesos ETL implementados en el compañia.
@@ -591,16 +549,49 @@ Existían varios requerimientos solicitados por los diversos colaboradores de la
 \item Realizar los siguientes procesos de transformación durante la extracción de datos del sistema origen
 \begin {itemize}
 \item Transformación del formato de fecha Juliano a formato DD/MM/AAAA.
-\item Transformación del tipo de dato ( númerico, decimal, fecha, char, bi
+\item Transformación del tipo de dato ( númerico, decimal, fecha, char, binario)
 \end{itemize}
 \item dentificar cada uno de las datos que son extraídos del sistema origen por medio de otras fuentes de información con la finalidad de identificar si existe una duplicidad en los procesos de extracción.
 \item Creación de un repositorio central donde sea alamacenada toda la información entraída que es requerida por los diferentes sistemas de la compañia para que desde su repositorio central se distribuya la información requerida por cada sistema.
 \item Desarrollo de criterios de unificación de la información que es estraída, esto con la finalidad de optimizar los tiempos de extracción de datos que realiza cada desarrollo ETL
 \item Se requiere que los 20 archivos planos requeridos sean originados por la herramienta ETL que se implementará
 \item Para la generación del archivo \textit{Currency_Exchange.txt} se requiere realizar la investigación del tipo de cambio de froma automática o con una interfaz gráfica en lugar de realizar la consulta y actualización de ese valor de forma manual de ese valor después de acceder al sitio del SAT.
-\item Por necesidades del negocui y debido a que dentro del plan estrátegico de la compañia est+a previto el inicio de operaciones en otros paises, será requerido el desarrollo de catálogos de información qque tengan datos y códigos sobre el tipo de moneda, ciudades, estados, paises, y códigos postales.
-\item El sistema antilavado debe realizar la carga de información contenida en los archivos planos que fueron originados con la extracción, pagos a terceros y peoplesoft  de las 08:00 horas del 
-\endênumerate}
+\item Por necesidades del negocio y debido a que dentro del plan estrátegico de la compañia está previsto el inicio de operaciones en otros paises, será requerido el desarrollo de catálogos de información qque tengan datos y códigos sobre el tipo de moneda, ciudades, estados, paises, y códigos postales.
+\item El sistema antilavado debe realizar la carga de información contenida en los archivos planos que fueron originados con la extracción, pagos a terceros y peoplesoft  de las 08:00 horas del día para el inicio de las actividades
+\item Construcción de una tabla de datos cuyos datos serían extraidos del sistema central como insumo para el sistema de lavado de dinero; dicha tabla debería de permitir la operaci+on del sistema de riesgos dentro de la compañia. Dicha tabla puede presentar hasta un día de retraso de información; esto es debido a que la información está disponible en T+1 días.
+\item Para uno de los sistemas se requirió poblar 12 tablas con datpos extraídos del sistema central. Dichop proceso tomó apróximadamente 2 horas.
+\item Diseño y capacitación por parte del proveedor de la herramienta ETL seleccionada. Dicha capacitación incluyó los módulos para la operación y administración de la herramienta.
+\item Diseño y desarrollo de un modelo que permitiera la administración de metadatos de la información que estába siendo extraída del sistema centra.
+\end{enumerate}
+
+\subsection{Requerimientos de limpieza de datos}
+
+Como parte de la definición de requerimientos funcionales que debía cumplir la
+herramienta, existe una sección que tenía que ver con la calidad y limpieza de
+datos; estos requerimientos solicitados por parte del área de tecnoloía fueron
+los siguientes:
+
+Se requería que el proceso ETL realizara la limpieza de datos de los campos
+descritos a continuación:
+
+\begin{itemize}
+
+\item RFC. Se requería que el RFC se encontrara estandarizado y cumplieran con los requerimientos establecidos por el buró de crédito
+
+\item Nombres de socios. Se requería que los nombres de socios no tuvieran caracteres especiales como puntos, comas, retornos de carro, paréntesis, corchetes, porcentaje, comillas y caracteres de 16 bits.
+
+\item Fechas de morosidad. Se solicitó que las fechas para el cálculo de la morosidad se encontraran en un formato de fecha correcto yyyymmdd y que no se permitieran valores nulos o negativos para este tipo de dato.
+
+\item Direcciones de socios. Fue requerido que las direcciones de los socios tuvieran una nomenclatura estándar para nombres de calles, colonias
+
+\item Ciudades/Municipios. Los códigos y nombres de ciudades y municipios debían de contar con un estándar y estos deberian de estar corregidos de a cuerdo a la información proporcionada por SEPOMEX.
+
+\item Teléfonos. Los teléfonos de los clientes debían contar con la clave lada y todos tenían que ser de 10 dígitos para números fijos y de 13 dígitos para números celulares
+
+\item Los números telefónicos no deberían de tener guiones o caracteres especiales.
+\end{itemize}
+
+Como parte de la estandarización de direcciones era requerido que todos los códigos postales se encontraran conforme a la lista proporcionada por SEPOMEX y todos deberían de ser de 5 dígitos.
 
 \cleardoublepage
 
