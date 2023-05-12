@@ -249,6 +249,22 @@ Las reglas definidas para este sistema son las siguientes:
 
 \section{Arquitectura aplicativa}
 
+La arquitectura aplicativca requerida para un proceso de Extracción, Transformación y carga de datos está comprendida por una herramienta ETL y algunos componentes de software adicionales para lograr la integración de la solución.
+
+El modelos de aplicaciones batch que se muestra a continuación ilustrará los componentes de la arquitectura que fueron reueridos para la implementación del proyecto. Este modelo fue desarrollado con base en las mejores prácticass para el uso de aplicaciones batch de tipo ETL.
+
+\subsection{Capas de la arquirtectura}
+El esquema de las aplicaciones tipo batch incluye los servicios necesarios para apoyar los procesos que se ejecutan durante largos periodos de tiempo y que ejecutan tareas de manera repetitiva. En este esquema de aplicación, un programa generalmente lee un número grande de registros de una base de datos o de un archivo, procesa los datos y luego escribe datos transformados a una base de datos o a un archivo.
+
+Del framework de aplicaciones batch encontramos las siguientes capas principales:
+\begin{itemize}
+\item Ejecución
+\item Proceso batch
+\item Aplicaciones batch
+\item Negocios
+\item Datos
+\end{itemize}
+
 % TODO
 
 \section{Arquitectura de negocio}
