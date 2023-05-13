@@ -16,13 +16,13 @@ selección de software de acuerdo a la metodología de Accenture fue la siguient
 \item Establecer los requerimientos de negocio.
 \item Establecer los requerimientos de evaluación de las herramientas de ETL.
 \item Generar una lista larga de proveedores.
-\item Generar una lista corta (generalmente 3 o 4 prveedores) de candidatos.
-\item Realizar  un RFP (Request For  Approval) para evaluar a  los candidatos de
-  manera individual y detallada.
+\item Generar una lista corta (generalmente 3 o 4 proveedores) de candidatos.
+\item Realizar un RFP (\emph{Request For Approval}) para evaluar a los
+  candidatos de manera individual y detallada.
 \item Realizar la recomendación final del producto.
 \end{enumerate}
 
-Este proceso se datalla en la figura~\ref{fig:proceso}:
+Este proceso se detalla en la figura~\ref{fig:proceso}:
 
 \begin{figure}[htb]
   \begin{center}
@@ -46,13 +46,13 @@ detallados a continuación.
 \item Se requería una conexión a correo electrónico mediante le protocolo SMTP
   para envío de informes de termino de procesos o de error en los mismos.
 
-\item Tener un log de procesos que tuviera la información de cada uno de los
-  procesos de extraccón/carga (inicio, fin, estatus de termino, errores (en cso
-  de haberlos)).
+\item Tener una bitácora (\emph{log}) de procesos que tuviera la información de
+  cada uno de los procesos de extracción/carga (inicio, fin, estado de término,
+  errores --en caso de haberlos--).
 
 \item La herramienta debía de tener la capacidad de contar con un esquema de
   limpieza de datos que permitiera identificar y corregir los errores en
-  nombres, direcciones, RFC's, números de teléfono, y algunos otros datos
+  nombres, direcciones, RFCs, números de teléfono, y algunos otros datos
   relevantes para la institución financiera.
 
 \item Permitir invocar a la herramienta ETL desde otras aplicaciones tales como
@@ -61,14 +61,14 @@ detallados a continuación.
 \item Permitir control y detalle de los errores presentados en los procesos o en
   cada uno de los componentes del flujo de datos. El control se llevaría a cabo
   mediante el envío, por parte del ETL, de errores a tablas log o archivos de
-  texto en dode se pudieran identificar de una manera sencilla, los errores
+  texto en donde se pudieran identificar de una manera sencilla, los errores
   presentados.
 
 \item Contar con un esquema de datos redundante, como puede ser un cluster,
   bases de datos replicadas, balanceo de cargas con tolerancia a fallos, etc.
 
 \item Contar con un esquema de control de versiones que soporte el trabajo de
-  multiples usuarios al mismo tiempo.
+  múltiples usuarios al mismo tiempo.
 
 \item La herramienta debía tener la capacidad para entregar diferentes archivos
   a los sistemas destino (archivos de texto, tablas en base de datos, XML, PDF,
@@ -106,22 +106,22 @@ detallados a continuación.
   especificados.
 
 \item Soportar modelos de minería de datos que ayudarían a la institución
-  financiera a realizar un anaálisis de sus datos y poder definir estrategias de
-  mercado para los diferentes productos que ofecían.
+  financiera a realizar un análisis de sus datos y poder definir estrategias de
+  mercado para los diferentes productos que ofrecían.
 
 \item Capacidades de soporte para DataWarehouse y Business Intelligence, este
   requerimiento era para cumplir con el plan estratégico de la institución.
 
-\item Capacidad de la herramienta para plublicar procesos como Web Services a
-  fin de poder acceder a ellos de manera remota o ejecutarlos a través de un
-  portal con los permisos correspondientes.
+\item Capacidad de la herramienta para publicar procesos como \emph{Web
+    Services} a fin de poder acceder a ellos de manera remota o ejecutarlos a
+  través de un portal con los permisos correspondientes.
 
-\item Capacidades de detección y correción de errores en los procesos, mediante
-  un proceso de depuración (Debugging) que sería ejecutado paso a paso.
+\item Capacidades de detección y corrección de errores en los procesos, mediante
+  un proceso de depuración (\emph{debugging}) que sería ejecutado paso a paso.
 
 \item Como un requerimiento básico, la herramienta debería de almacenar la
   información extraída en una sola fuente de datos, para la solución propuesta
-  fue una base de datos de paso llamada base de datos stage.
+  fue una base de datos de paso llamada base de datos \emph{stage}.
 
 \item Explotación de la información de una base centralizada para realizar
   reportes.
@@ -155,13 +155,13 @@ seleccionar la herramienta fueron los siguientes:
   de la institución y la futura que se planteó en el presente proyecto.
 
 \item La herramienta debía ser capaz de poder integrarse son los sistemas de la
-  institución (PeopleSoft, Core bancario, systema de reportes, sistema de
+  institución (PeopleSoft, Core bancario, sistema de reportes, sistema de
   recursos humanos, pagos a terceros, etc.)
 
-\item La herramienta debía ser capaz de ejecutarse en diferentes paltaformas
+\item La herramienta debía ser capaz de ejecutarse en diferentes plataformas
   (Windows, Linux, Unix, Mainframes).
 
-\item Conectividad con los istemas fuentes (ODBC, OLAP, LDAP) y con diferentes
+\item Conectividad con los sistemas fuente (ODBC, OLAP, LDAP) y con diferentes
   sistemas manejadores de bases de datos como Oracle, DB2, SQL Server, Informix,
   Sybase, Teradata.
 
@@ -180,11 +180,11 @@ Como mencionamos al inicio del documento, parte importante de la selección de
 sofware fue la definición de los criterios de evaluación de la herramienta ETL a
 utilizar como parte del proyecto. Dichos criterios nos ayudaron a realizar una
 evaluación objetiva de las diferentes herramientas y tener un panorama general
-de los productos que cumplían con las caracteristicas y necesidades de la
+de los productos que cumplían con las características y necesidades de la
 institución financiera. Tomando como base esas necesidades y la experiencia de
 Accenture se definieron los criterios de selección de software.
 
-Los criterios se agruparon en conceptos genericos que describen la funcionalidad
+Los criterios se agruparon en conceptos genéricos que describen la funcionalidad
 de cada área. Estos criterios se listan a continuación:
 
 \begin{enumerate}
@@ -198,7 +198,7 @@ de cada área. Estos criterios se listan a continuación:
 \item \textit{Estrategias corporativas.}
 \item \textit{Costos.}
 \item \textit{Convenios con otros proveedores.}
-\item \textit{Finanzas de la compañia.}
+\item \textit{Finanzas de la compañía.}
 \end{enumerate}
 
 \subsection{Lista de proveedores}
@@ -246,7 +246,7 @@ criterios de evaluación
       \hline
       Estrategias corporativas & 6\% & 10\\
       \hline
-      Finanzas de la compañia proveedora & 6\% & 11\\
+      Finanzas de la compañía proveedora & 6\% & 11\\
       \hline
     \end{tabular}
     \caption{Porcentajes y prioridades de evaluación.}
@@ -392,7 +392,7 @@ siguiente tabla con los resultados finales:
         & \textbf{5}
         & \textbf{3}\\
         \hline
-        \rowcolor[gray]{0.9}\textbf{strategias corporativas}
+        \rowcolor[gray]{0.9}\textbf{Estrategias corporativas}
         & \textbf{5.71\%}
         & \textbf{3}
         &\textbf{ 3}
@@ -401,7 +401,7 @@ siguiente tabla con los resultados finales:
         & \textbf{3}
         & \textbf{3}\\
         \hline
-        Contibución del producto & & 3 & 3 & 5 & 3 & 3 & 3 \\
+        Contribución del producto & & 3 & 3 & 5 & 3 & 3 & 3 \\
         \hline
         Porcentaje de ganancias & & 3 & 3 & 3 & 4 & 3 & 3 \\
         \hline
@@ -414,7 +414,7 @@ siguiente tabla con los resultados finales:
         & \textbf{3.2}
         & \textbf{2.4}\\
         \hline
-        Promedio del percio de venta & & 5 & 5 & 1 & 1 & 2 & 2 \\
+        Promedio del precio de venta & & 5 & 5 & 1 & 1 & 2 & 2 \\
         \hline
         Estructura de precios & & 3 & 3 & 1 & 1 & 3 & 1 \\
         \hline
@@ -439,7 +439,7 @@ siguiente tabla con los resultados finales:
         \hline
         Integradores de sistemas & & 2 & 5 & 3 & 5 & 3 & 2 \\
         \hline
-        \rowcolor[gray]{0.9}\textbf{Finanzas de la compañia}
+        \rowcolor[gray]{0.9}\textbf{Finanzas de la compañía}
         & \textbf{5.71\%}
         & \textbf{4}
         & \textbf{3}
@@ -452,7 +452,7 @@ siguiente tabla con los resultados finales:
         \hline
         Crecimiento de ganancias & & 4 & 2 & 4 & 3 & 5 & 5 \\
         \hline
-        Estatus del procveedor & & 5 & 5 & 5 & 5 & 5 & 5 \\
+        Estado del proveedor & & 5 & 5 & 5 & 5 & 5 & 5 \\
         \hline
         Total
         & 100.00\% & 168.91 & 171.18 & 190.45 & 186.76 & 172.65 & 158.21 \\
@@ -490,7 +490,7 @@ suficiente de parte del proveedor. Así mismo, Microsoft se incluyó a petición
 explicita de la institución.
 
 La recomendación proporcionada por Accenture fue Informática debido a que al ser
-una empres independiente enfocada a la integración de datos, no estaba casado
+una empresa independiente enfocada a la integración de datos, no estaba casado
 con ninguna base de datos específica, como si lo están el resto de los
 participantes , y esto permitiría una mejor integración a las necesidades de la
 institución. Basados en esta recomendación la institución financiera se decidió
@@ -507,7 +507,7 @@ compañía son:
 \item Plataforma empresarial estandarizada (Microsoft)
 \item Las personas involucradas en el proyecto contaban con el conocimiento del
   negocio, aplicaciones y datos, necesarios para el desarrollo del mismo.
-\item Se tiene una claridad en las necesidades del negpocio e inclusive existen
+\item Se tiene una claridad en las necesidades del negocio e inclusive existen
   iniciativas de integración, limpieza e implementación de un proceso de calidad
   de datos.
 \end{itemize}
@@ -526,10 +526,10 @@ correcta. Dichas debilidades se mencionan a continuación:
 \item No se tenía un esquema de gobierno de datos ni manejo de datos maestros.
 \end{itemize}
 
-Una vez identificadas las fortalezas y debilidades dentro de la compañia a nivel
-funcional, también se realizó un análisis de las capacidades técnologicas con
+Una vez identificadas las fortalezas y debilidades dentro de la compañía a nivel
+funcional, también se realizó un análisis de las capacidades tecnológicas con
 las que se contaba. Principalmente se enfocó el proyecto a las capacidades del
-flujo de datos, es decir, aquellas herramientas técnologicas que no permitían un
+flujo de datos, es decir, aquellas herramientas tecnológicas que no permitían un
 flujo de datos eficiente entre en sistema central y los sistemas destino. La
 identificación de ventajas y desventajas dentro del flujo de datos nos permitió
 enfocarnos en aquellos componentes que tenían que ser atendidos de inmediato.
@@ -541,7 +541,7 @@ Las desventajas identificadas en el flujo son:
   información, ocasionando que el flujo de información entre sistemas fuera más
   lento.
 \item Se tenía una sobrecarga de los procesos en el sistema origen de datos.
-\item Se teanía redundancia de información; es decir, se repetía la información
+\item Se tenía redundancia de información; es decir, se repetía la información
   extraída.
 \item No se tenía un proceso estándar de calidad de los datos.
 \item No se tenía documentado el mapeo de datos entre el sistema origen y el
@@ -560,8 +560,8 @@ ser:
   como limpieza y calidad en los datos extraídos y almacenados.
 \item Contar con un sistema de gobierno de datos.
 \item Establecer las bases para la creación de un modelo de inteligencia de
-  negocios alineados al plan estrátegico de la compañia.
-\item Creación de un repositorio central de datos que alamcene toda la
+  negocios alineados al plan estratégico de la compañía.
+\item Creación de un repositorio central de datos que almacene toda la
   información extraída y que nos permita tener una arquitectura más robusta y
   centralizada para el manejo de información.
 \end{enumerate}
@@ -569,7 +569,7 @@ ser:
 \section{Definición de los requerimientos}
 
 Existían varios requerimientos solicitados por los diversos colaboradores de la
-compañia con los cuales Accenture había conversado. Con base en las
+compañía con los cuales Accenture había conversado. Con base en las
 conversaciones se definieron los siguientes requerimientos tanto funcionales
 como técnicos.
 
@@ -578,16 +578,16 @@ como técnicos.
 \begin{enumerate}
 
 \item Analizar cada uno de los datos que están siendo extraídos de los sistemas
-  origen por cada uno de los procesos ETL implementados en el compañia.
+  origen por cada uno de los procesos ETL implementados en el compañía.
 
 \item Implementar procesos de limpieza de datos durante la extracción del
   sistema
 
   \begin {itemize}
-  \item Eliminación de carácteres especiales en los nombres de los usuarios.
+  \item Eliminación de caracteres especiales en los nombres de los usuarios.
   \item Substitución de las abreviaturas existentes en los nombres; por ejemplo:
     Ma; el cuál es interpretado como María.
-  \item Realizar la depuración de los RFC's de los usuarios ya sea agregando o
+  \item Realizar la depuración de los RFCs de los usuarios ya sea agregando o
     eliminando caracteres para que este sea correcto.
   \end{itemize}
 
@@ -596,20 +596,20 @@ como técnicos.
 
   \begin {itemize}
   \item Transformación del formato de fecha Juliano a formato DD/MM/AAAA.
-  \item Transformación del tipo de dato ( númerico, decimal, fecha, char,
-    binario)
+  \item Transformación del tipo de dato (numérico, decimal, fecha, carácter,
+    booleano).
   \end{itemize}
 
-\item dentificar cada uno de las datos que son extraídos del sistema origen por
+\item Identificar cada uno de las datos que son extraídos del sistema origen por
   medio de otras fuentes de información con la finalidad de identificar si
   existe una duplicidad en los procesos de extracción.
 
-\item Creación de un repositorio central donde sea alamacenada toda la
-  información entraída que es requerida por los diferentes sistemas de la
-  compañia para que desde su repositorio central se distribuya la información
+\item Creación de un repositorio central donde sea almacenada toda la
+  información extraída que es requerida por los diferentes sistemas de la
+  compañía para que desde su repositorio central se distribuya la información
   requerida por cada sistema.
 
-\item Desarrollo de criterios de unificación de la información que es estraída,
+\item Desarrollo de criterios de unificación de la información que es extraída,
   esto con la finalidad de optimizar los tiempos de extracción de datos que
   realiza cada desarrollo ETL.
 
@@ -617,35 +617,35 @@ como técnicos.
   herramienta ETL que se implementará.
 
 \item Para la generación del archivo \textit{Currency\_Exchange.txt} se requiere
-  realizar la investigación del tipo de cambio de froma automática o con una
+  realizar la investigación del tipo de cambio de forma automática o con una
   interfaz gráfica en lugar de realizar la consulta y actualización de ese valor
   de forma manual de ese valor después de acceder al sitio del SAT.
 
 \item Por necesidades del negocio y debido a que dentro del plan estrátegico de
-  la compañia está previsto el inicio de operaciones en otros paises, será
-  requerido el desarrollo de catálogos de información qque tengan datos y
-  códigos sobre el tipo de moneda, ciudades, estados, paises, y códigos
+  la compañía está previsto el inicio de operaciones en otros países, será
+  requerido el desarrollo de catálogos de información que tengan datos y
+  códigos sobre el tipo de moneda, ciudades, estados, países, y códigos
   postales.
 
 \item El sistema antilavado debe realizar la carga de información contenida en
   los archivos planos que fueron originados con la extracción, pagos a terceros
   y PeopleSoft de las 08:00 horas del día para el inicio de las actividades
 
-\item Construcción de una tabla de datos cuyos datos serían extraidos del
+\item Construcción de una tabla de datos cuyos datos serían extraídos del
   sistema central como insumo para el sistema de lavado de dinero; dicha tabla
-  debería de permitir la operaci+on del sistema de riesgos dentro de la
-  compañia. Dicha tabla puede presentar hasta un día de retraso de información;
+  debería de permitir la operación del sistema de riesgos dentro de la
+  compañía. Dicha tabla puede presentar hasta un día de retraso de información;
   esto es debido a que la información está disponible en T+1 días.
 
-\item Para uno de los sistemas se requirió poblar 12 tablas con datpos extraídos
-  del sistema central. Dichop proceso tomó apróximadamente 2 horas.
+\item Para uno de los sistemas se requirió poblar 12 tablas con datos extraídos
+  del sistema central. Dicho proceso tomó aproximadamente 2 horas.
 
 \item Diseño y capacitación por parte del proveedor de la herramienta ETL
   seleccionada. Dicha capacitación incluyó los módulos para la operación y
   administración de la herramienta.
 
 \item Diseño y desarrollo de un modelo que permitiera la administración de
-  metadatos de la información que estába siendo extraída del sistema centra.
+  metadatos de la información que estaba siendo extraída del sistema central.
 
 \end{enumerate}
 
@@ -653,7 +653,7 @@ como técnicos.
 
 Como parte de la definición de requerimientos funcionales que debía cumplir la
 herramienta, existe una sección que tenía que ver con la calidad y limpieza de
-datos; estos requerimientos solicitados por parte del área de tecnoloía
+datos; estos requerimientos solicitados por parte del área de tecnología
 comprendían que el proceso ETL realizara la limpieza de datos de los campos
 descritos a continuación:
 
@@ -674,7 +674,7 @@ descritos a continuación:
   tuvieran una nomenclatura estándar para nombres de calles, colonias
 
 \item Ciudades/Municipios. Los códigos y nombres de ciudades y municipios debían
-  de contar con un estándar y estos deberian de estar corregidos de a cuerdo a
+  de contar con un estándar y estos deberían de estar corregidos de a cuerdo a
   la información proporcionada por SEPOMEX.
 
 \item Teléfonos. Los teléfonos de los clientes debían contar con la clave lada y
