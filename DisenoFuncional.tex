@@ -24,7 +24,6 @@ realizar los procesos de extracción, transformación, clasificación y carga ha
 los sistemas destino y hacia cada uno de los tipos de datos que necesitaban los
 equipos y bases de datos destino.
 
-
 \section{Arquitectura de aplicaciones (arquitectura detallada)}
 
 La arquitectura diseñada se encontraba dividida en cuatro capas y representan el
@@ -33,12 +32,13 @@ usuario donde se realizaron todas las tareas de monitoreo, manejo de la
 herramienta y visualización de datos en el sistema destino. La capa de
 presentación únicamente contenía el servidor de correo que envía la información
 a la capa de interfaz de usuario. Por su parte la capa de integración contenía
-los procesos de la herramienta ETL; así como la base de datos stage y la base de
-datos de catálogos; esta capa también incluía a las aplicaciones que envíaban
-información complementaria a los sistemas destino. Finalmente contabamos con la
-capa de datos que contenía a los sistemas destino, el sistema fuente y al
-servidor de control de usuarios a través del directorio activo. La funcionalidad
-de cada capa así como el flujo de datos se describen a continuación.
+los procesos de la herramienta ETL; así como la base de datos \emph{stage} y la
+base de datos de catálogos; esta capa también incluía a las aplicaciones que
+enviaban información complementaria a los sistemas destino. Finalmente
+contábamos con la capa de datos que contenía a los sistemas destino, el sistema
+fuente y al servidor de control de usuarios a través del directorio activo. La
+funcionalidad de cada capa así como el flujo de datos se describen a
+continuación.
 
 \subsection{Capa de datos}
 
@@ -47,7 +47,7 @@ datos del que estemos hablando. El core bancario tenía la funcionalidad de
 enviar datos a la herramienta ETL a través del protocolo TCP\/IP. Por sus parte
 el directorio activo al manejar información de los usuarios de la herramienta
 tenía la funcionalidad de autenticar a cada usuario que accedía a la herramienta
-otorgándole los permisos necesarioa para ejecutar las tareas dentro de la
+otorgándole los permisos necesarios para ejecutar las tareas dentro de la
 herramienta ETL, la comunicación entre la herramienta ETL y el directorio activo
 se realizó mediante el protocolo LDAP.
 
@@ -62,31 +62,31 @@ independientemente de la herramienta ETL que los envíe.
 La capa de integración tiene la funcionalidad de integrar los datos entre las
 diferentes aplicaciones; la herramienta ETL contiene todos los servicios para la
 extracción de datos del core bancario, transformarlos y cargarlos en los
-diferentes sistemas destinode la capa de datos. La herramienta ETL tiene la
-funcionalidad de enviar los datos a la base de datos stage \footnote{Las bases
-  de datos llamadas stage, son bases de datos temporales o de paso antes de
-  llevar la información a su destino final.} así como a la base de datos de
-catálogos. El proceso debía enviar vía FTP los archivos de texto a una dirección
-específica dentro de un servidor para que el ETL de lsistema antilavado tome los
-archivos y complemente la información que será enviada vía TCP/IP a la
-aplicación de usuario final. A su vez, el proceso ETL también envía información
-a uno de los ETL's del sistema de reportes para que sea complementada por parte
-del sistema de conciliación bancaria y sea enviada a la base de datos final de
-reportes.
+diferentes sistemas destino de la capa de datos. La herramienta ETL tiene la
+funcionalidad de enviar los datos a la base de datos \emph{stage}\footnote{Las
+  bases de datos llamadas \emph{stage} son bases de datos temporales o de paso
+  antes de llevar la información a su destino final.} así como a la base de
+datos de catálogos. El proceso debía enviar vía FTP los archivos de texto a una
+dirección específica dentro de un servidor para que el ETL del sistema
+antilavado tome los archivos y complemente la información que será enviada vía
+TCP/IP a la aplicación de usuario final. A su vez, el proceso ETL también envía
+información a uno de los ETL's del sistema de reportes para que sea
+complementada por parte del sistema de conciliación bancaria y sea enviada a la
+base de datos final de reportes.
 
 \subsection{Capa de presentación}
 
-La capa de presentación de la institución financiera contenía sólamente un
+La capa de presentación de la institución financiera contenía solamente un
 servidor de correo; la principal funcionalidad del servidor de correo era
 proporcionar a los usuarios la información de los procesos; es decir, recibía
-información del estatus de los procesos ETL y a su vez enviaría la información
-de este estatus al usuario final.
+información del estado de los procesos ETL y a su vez enviaría la información
+de este estado al usuario final.
 
 \subsection{Capa de interfaz de usuario}
 
 La funcionalidad de la capa de interfaz de usuario era administrar la
 información que se recibe del servidor de correo así como de las diferentes
-aplicciones con las que contaba la institución financiera. Esta capa era capaz
+aplicaciones con las que contaba la institución financiera. Esta capa era capaz
 de soportar un ambiente gráfico que permitía a los usuarios administrar,
 construir y diseñar sus propios elementos.
 
@@ -159,7 +159,7 @@ los siguientes componentes:
 \item \textit{Administración de pruebas}: Como todo proyecto de implementación,
   fue necesario llevar una administración de las pruebas; las pruebas que se
   llevaron a cabo dentro de este proceso fueron: pruebas unitarias, pruebas de
-  integración, pruebas de performance y pruebas de usuarios
+  integración, pruebas de desempeño y pruebas de usuarios.
 
 \end{itemize}
 
@@ -167,7 +167,7 @@ los siguientes componentes:
 
 Como parte de la herramienta ETL se integraron tres áreas que tenían relación
 con los requerimientos de negocio: la capa de interacción, la capa de
-integración y la capa que conteía las reglas de negocio.
+integración y la capa que contenía las reglas de negocio.
 
 \begin{itemize}
 
@@ -204,7 +204,7 @@ integración y la capa que conteía las reglas de negocio.
   \item \textbf{Reglas de transformación.} Definición de todas las
     transformaciones utilizadas desde la extracción de datos hasta la carga de
     los mismos en la nueva estructura de base de datos.
-  \item \textbf{Proceso de carga de datos.} DEscripción de los procesos de carga
+  \item \textbf{Proceso de carga de datos.} Descripción de los procesos de carga
     de datos a cada uno de los sistemas destino.
   \item \textbf{Proceso de limpieza de datos.} Descripción de los procesos de
     limpieza de datos como: direcciones, teléfonos, nombres, RFCs y fechas.
@@ -234,7 +234,7 @@ procesaba en cada uno de los sistemas destino:
 \item El sistema de manejo de riesgos contenía la información de las cuentas
   con pagos vencidos o que presentaban algún grado de morosidad. Esta
   información también se obtenía del procesador principal de transacciones
-  bancariasy sería procesada por la herramienta ETL que se implementó.
+  bancarias y sería procesada por la herramienta ETL que se implementó.
 
 \item Finalmente, existía el sistema para el manejo de los reportes operativos
   que requería la organización. La principal tarea de este sistema era generar
