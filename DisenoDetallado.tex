@@ -5,19 +5,19 @@ En este capítulo...
 
 \section{Dependencias y frecuencia de las extracciones de datos}
 
-Como primer paso dentro dle proceos de extracción se identificaron las
+Como primer paso dentro del proceso de extracción se identificaron las
 dependencias de los sistemas origen con otros procesos, tareas o reglas de
-negocio dentro de la organizción, así como la frecuencia esperada o deseada de
+negocio dentro de la organización, así como la frecuencia esperada o deseada de
 la extracción de datos. La extracción de datos se realizó con una periodicidad
 diaria; esto debido a que al tratarse del sistema principal de la institución
 financiera la información se actualizaba de manera diaria. La herramienta ETL
-nos permitió identificar aquellas tablas y campos que sufrian modificaciones, de
+nos permitió identificar aquellas tablas y campos que sufrían modificaciones, de
 tal forma que se extrajo solo la información que sufría cambios a lo largo del
 día. La extracción de datos se realizó en un horario no operativo, a fin de no
 afectar la operación de la institución; además este proceso dependía del termino
-del proceso de cierre diario de operaciones. Solamente uan vez que el proceso
+del proceso de cierre diario de operaciones. Solamente una vez que el proceso
 hubiera terminado comenzaba la extracción por parte de la herramienta ETL; este
-proceso contaba con una ventana de procesamiento de 5 horas. La extracci''on fue
+proceso contaba con una ventana de procesamiento de 5 horas. La extracción fue
 almacenada en la base de datos temporal dentro de la herramienta ETL.
 
 \subsection{Extracción inicial}
@@ -25,10 +25,10 @@ almacenada en la base de datos temporal dentro de la herramienta ETL.
 En la extracción inicial se realizaron las siguientes transformaciones:
 
 \begin{itemize}
-\item Transformación de fecha jualiana a fecha gregoriana.
+\item Transformación de fecha juliana a fecha gregoriana.
 \item Cambio en los tipos de dato al momento de almacenarlos en la tabla
   temporal; principalmente transformación del tipo de dato \textit{char} al tipo
-  de dato \textit{varchar} y los datos númericos a decimal.
+  de dato \textit{varchar} y los datos numéricos a decimal.
 \end{itemize}
 
 Al momento de que se terminaba la extracción de datos, se cerraba la conexión a
@@ -43,7 +43,7 @@ realizaron mediante extracciones incrementales con base en la adición,
 actualización o eliminación de datos de las tablas seleccionadas. Se consideró
 realizar la extracción total de los registros solo en caso de que las
 modificaciones o actualizaciones en la base de datos fueran muchas; las
-condiciones para realizar la extraccióncompleta fueron las siguientes:
+condiciones para realizar la extracción completa fueron las siguientes:
 
 \begin{enumerate}
 \item Existían cambios en más del 50\% de los registros.
@@ -75,7 +75,7 @@ entre los cuales se encuentra la limpieza de datos, los estándares y
 procedimientos utilizados, así como las reglas de transformación definidas para
 cada uno de los sistemas destino. La transformación de los datos se realizó
 dentro de la misma base de datos de paso y se almacenó en otra instancia de esta
-misma base de datos. El siguiente diagrama muestra como se realizarón las
+misma base de datos. El siguiente diagrama muestra como se realizaron las
 transformaciones requeridas.
 
 \begin{figure}[htb]
@@ -86,7 +86,7 @@ transformaciones requeridas.
   \end{center}
 \end{figure}
 
-A continuación se detallan las reglas utilizadas para realizar la transfocmacón
+A continuación se detallan las reglas utilizadas para realizar la transformación
 de datos.
 
 \subsection{Limpieza de la fuente de datos}
@@ -94,7 +94,7 @@ de datos.
 La limpieza de la fuente de datos \textbf{NO} estaba dentro del alcance del
 proyecto; sin embargo se realizaron las transformaciones de la fuente de datos
 para realizar la limpieza de datos hacia los sistemas destino. Como parte de un
-proceso de calidad de la información y limpieza de datos se definierón los
+proceso de calidad de la información y limpieza de datos se definieron los
 siguientes criterios:
 
 \begin{enumerate}
@@ -118,14 +118,14 @@ siguientes criterios:
   físicas y 12 posiciones para las personas morales. En caso de no contar con un
   RFC valido, el registro era rechazado y enviado a una tabla de auditoria para
   su corrección dentro del sistema fuente de parte del área de tecnología de la
-  compañia.
+  compañía.
 
 \item Todos los códigos postales debían ser de cinco dígitos, en caso de existir
   algún registro con mayor o menor número, estos debían de ser enviados a una
   tabla de auditoria para su corrección dentro del sistema fuente. Se consideró
   una homologación de datos para los códigos de ciudades y estados. Todos los
   códigos de estados se homologaron a tres dígitos que corresponden a las tres
-  primeras letras de cada estado; se realizó unaexcepción para el caso de
+  primeras letras de cada estado; se realizó una excepción para el caso de
   Chiapas (CHS) que podría confundirse con Chihuahua (CHI).
 
 \item Las fechas se homologaron al formato yyyymmdd y no debían permitir valores
@@ -136,7 +136,7 @@ siguientes criterios:
 \subsection{Estándares y procedimientos utilizados para la interrelación de los datos}
 
 Para realizar una estandarización de los datos se creó una base de datos
-temporal que conternía la información de todos los campos con los mismos datos
+temporal que contenía la información de todos los campos con los mismos datos
 pero que su sistema origen era diferente. La creación de esta tabla temporal fue
 crear la base para generar una tabla de referencias cruzadas que representara un
 gobierno de datos o MDM (Master Data Management) por sus siglas en Inglés
@@ -189,7 +189,7 @@ FEC_VENCIMIENTO_5_D = CAST(RIGHT(LTRIM(RTRIM(FEC_VENCIMIENTO_5)),2) +
 \end{verbatim}
 
 \item La descripción de la información correspondiente a las garantías debía
-  de estar vacio en la tabla destino.
+  de estar vacío en la tabla destino.
 
 \item Para almacenar la fecha de último monto con saldo se tomó la fecha de
   vencimiento más antigua que se tenía para cada registro dentro de la tabla de
@@ -199,13 +199,13 @@ FEC_VENCIMIENTO_5_D = CAST(RIGHT(LTRIM(RTRIM(FEC_VENCIMIENTO_5)),2) +
   valor $=$ 1 $($Personas físicas$)$ o 6; en estos casos se colocó un valor 20
   dentro del campo Tipo\_producto de la tabla TA\_SALDOS.
 
-\item El número de docio para poblar la tabla TA\_SALDOS se obtuvo de la
+\item El número de socio para poblar la tabla TA\_SALDOS se obtuvo de la
   tabla de cuentas por socio, pero solamente de aquellas cuentas cuyo tipo de
   producto era 4 u 8 y que tuvieran un saldo en la tabla TA\_SALDOS.
 
 \item Se calculó el número de créditos de cada socio y este valor se grabó en
   la tabla CIF\_INFGEN; en caso de que el número de créditos fuera nulo se
-  colocó un valor por default 0.
+  colocó un valor por omisión cero.
 
 \item Se insertó el número de socio dentro de la tabla TA\_CTAXSOCIO para
   aquellos números de cuenta menores a 20000000000 y cuya clave de relación
@@ -244,36 +244,37 @@ Las reglas definidas para este sistema son las siguientes:
   social, cuenta mexicana, servicuenta y cuentamiga.
 \item Si el tipo CIF es una persona moral (CUTYP $=$ 5), entonces el campo
   CompanyLegalId se pobló con dicho valor, en caso contrario se asignó un valor
-  constante vacio ``''.
+  constante vacío ``''.
 \end{itemize}
 
 \section{Arquitectura aplicativa}
 
-La arquitectura aplicativca requerida para un proceso de Extracción,
+La arquitectura aplicativa requerida para un proceso de Extracción,
 Transformación y carga de datos está comprendida por una herramienta ETL y
 algunos componentes de software adicionales para lograr la integración de la
 solución.
 
-El modelos de aplicaciones batch que se muestra a continuación ilustrará los
-componentes de la arquitectura que fueron reueridos para la implementación del
-proyecto. Este modelo fue desarrollado con base en las mejores prácticass para
-el uso de aplicaciones batch de tipo ETL.
+El modelos de aplicaciones por lotes (\emph{batch}) que se muestra a
+continuación ilustrará los componentes de la arquitectura que fueron requeridos
+para la implementación del proyecto. Este modelo fue desarrollado con base en
+las mejores prácticas para el uso de aplicaciones por lotes de tipo ETL.
 
-\subsection{Capas de la arquirtectura}
+\subsection{Capas de la arquitectura}
 
-El esquema de las aplicaciones tipo batch incluye los servicios necesarios para
+El esquema de las aplicaciones tipo por lotes incluye los servicios necesarios para
 apoyar los procesos que se ejecutan durante largos periodos de tiempo y que
 ejecutan tareas de manera repetitiva. En este esquema de aplicación, un programa
 generalmente lee un número grande de registros de una base de datos o de un
 archivo, procesa los datos y luego escribe datos transformados a una base de
 datos o a un archivo.
 
-Del framework de aplicaciones batch encontramos las siguientes capas principales:
+Del marco de trabajo (\emph{framework}) de aplicaciones por lotes encontramos
+las siguientes capas principales:
 
 \begin{itemize}
 \item Ejecución
-\item Proceso batch
-\item Aplicaciones batch
+\item Proceso por lotes
+\item Aplicaciones por lotes
 \item Negocios
 \item Datos
 \end{itemize}
@@ -286,7 +287,7 @@ Del framework de aplicaciones batch encontramos las siguientes capas principales
 
 \section{Arquitectura de datos}
 
-Como se explicó en los capitulos anteriores, la institución financiera contaba
+Como se explicó en los capítulos anteriores, la institución financiera contaba
 con diferentes procesos ETL que extraían información del sistema
 principal. Estos sistemas trabajaban de manera independiente por lo que cada
 sistema destino tenía su base de datos temporal antes de enviarla a su
