@@ -279,7 +279,56 @@ las siguientes capas principales:
 \item Datos
 \end{itemize}
 
-% TODO
+El marco de trabajo comprende componentes que brindan servicios a las capas principales de la cuales son:
+
+\begin{itemize}
+\item Servidores de aplicación
+\item Flujos de trabajo de usuarios
+\item Captura de datos
+\item Servicios por lotes
+\item Servicios de reportes
+\item Servicios de gestión
+\item Servicios de seguridad
+\item Servicios comunes
+\end{itemize}
+
+En las siguientes secciones se describirá la responsabilidad de cada una de las capas.
+
+\subsection{Componentes de la capa de presentación}
+Dentro de la capa de presentación se tienen varios componentes entre ellos el panel de consulta y la interfaz de usuario que nos ayuda a la revisión y monitoreo del proceso por lotes; así como los resultados que este arroja.
+
+\subsection{Servicios de la capa de presentación}
+Los servicios que brindan los componentes de esta capa de a acuerdo al marco de trabajo utilizado son los siguientes:
+
+\begin{enumerate}
+\item Monitoreo de programa
+\item Reportes
+\item Servivios comunes
+\end{enumerate}
+
+\subsubsection{Monitoreo de programas}
+Este servicio proporciona la herramientas para monitorear cuales programas y aplicaciones están siendo ejecutados, así como la información a nivel sistema del uso de recursos. El monitoreo de programas puede actuar como entrada principal en las decisiones de balanceo de cargas
+
+\subsubsection{Reportes}
+Reportes permite al usuario dar formato a los resultados de una consulta dentro de la producción de reportes de calidad. 
+
+\subsection{Componentes de la capa de ejecución}
+Los componentes encontrados en esta capa de acuerdo al marco utilizado son los siguientes:
+
+\begin{itemize}
+\item Calendarizador de tareas (\emph{Scheduler})
+\item Script de ejecución de programas.
+\end{itemize}
+
+Los componentes de esta capa son los encargados de comenzar con el proceso de ejecución y se describen a continuación:
+
+\subsubsection{Calendarizador}
+
+El servicio de calendarización proporciona la estructura de control para programas por lotes; esto es, administra el flujo de su procesamiento. Un proceso de calendarización debe de proporcionar una interfaz de usuario para entrar y dar mantenimiento a la información y a la calendarización de los procesos por lotes.
+
+\subsubsection{Scripts de ejecución de programas}
+
+Este servicio es responsable de establecer y restaurar el ambiente en el cuál el proceso por lotes es ejecutado; también, debe ser capaz de ser ejecutado por el calendarizador así como recibir y/o enviar parámetros del calendarizador al proceso por lotes, tales como el nombre del proceso a ser ejecutado. El script debe proporcionar los procedimientos y guía necesarios para ejecutar el proceso por lotes.
 
 \section{Arquitectura de negocio}
 
