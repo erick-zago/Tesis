@@ -12,7 +12,7 @@ la extracción de datos. La extracción de datos se realizó con una periodicida
 diaria; esto debido a que al tratarse del sistema principal de la institución
 financiera la información se actualizaba de manera diaria. La herramienta ETL
 nos permitió identificar aquellas tablas y campos que sufrían modificaciones, de
-tal forma que se extrajo solo la información que sufría cambios a lo largo del
+tal forma que se extrajo sólo la información que sufría cambios a lo largo del
 día. La extracción de datos se realizó en un horario no operativo, a fin de no
 afectar la operación de la institución; además este proceso dependía del termino
 del proceso de cierre diario de operaciones. Solamente una vez que el proceso
@@ -41,7 +41,7 @@ Después de realizada la extracción inicial desde el sistema fuente y con los
 datos almacenados en el repositorio temporal, las siguientes extracciones se
 realizaron mediante extracciones incrementales con base en la adición,
 actualización o eliminación de datos de las tablas seleccionadas. Se consideró
-realizar la extracción total de los registros solo en caso de que las
+realizar la extracción total de los registros sólo en caso de que las
 modificaciones o actualizaciones en la base de datos fueran muchas; las
 condiciones para realizar la extracción completa fueron las siguientes:
 
@@ -238,7 +238,7 @@ Las reglas definidas para este sistema son las siguientes:
 \item Valor fijo 'T' para el segundo campo.
 \item Valor fijo 'F' para el tercer campo.
 \end{enumerate}
-\item Para la generación del archivo de cuentas se tomaron solo aquellas
+\item Para la generación del archivo de cuentas se tomaron sólo aquellas
   cuentas que tuvieron movimientos durante el día.
 \item Solamente se tomaron en cuenta los siguientes tipos de cuenta: Parte
   social, cuenta mexicana, servicuenta y cuentamiga.
