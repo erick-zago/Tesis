@@ -7,7 +7,7 @@ proyecto así como el análisis de los requerimientos técnicos y funcionales.
 \section{Proceso de selección de software}
 
 Parte importante para llegar a la solución propuesta fue la selección del
-software en el cual se desarrolló el nuevo proceso ETL \footnote{Extracción,
+software en el cual se desarrolló el nuevo proceso ETL\footnote{Extracción,
   Transformación y Carga (\emph{load} en Inglés).}. La selección de software
 requirió de varios pasos previos a la toma de la decisión. El proceso de
 selección de software de acuerdo a la metodología de Accenture fue la siguiente:
@@ -26,7 +26,7 @@ Este proceso se detalla en la figura~\ref{fig:proceso}:
 
 \begin{figure}[htb]
   \begin{center}
-    \includegraphics[width=12cm, height=3cm, scale=0.5]{Proceso_seleccion_software.jpg}
+    \includegraphics[width=\linewidth]{Proceso_seleccion_software.jpg}
     \caption{Proceso de selección de software}
     \label{fig:proceso}
   \end{center}
@@ -60,12 +60,13 @@ detallados a continuación.
 
 \item Permitir control y detalle de los errores presentados en los procesos o en
   cada uno de los componentes del flujo de datos. El control se llevaría a cabo
-  mediante el envío, por parte del ETL, de errores a tablas log o archivos de
-  texto en donde se pudieran identificar de una manera sencilla, los errores
-  presentados.
+  mediante el envío, por parte del ETL, de errores a tablas de bitácora o
+  archivos de texto en donde se pudieran identificar de una manera sencilla, los
+  errores presentados.
 
-\item Contar con un esquema de datos redundante, como puede ser un cluster,
-  bases de datos replicadas, balanceo de cargas con tolerancia a fallos, etc.
+\item Contar con un esquema de datos redundante, como puede ser un grupo
+  (\emph{cluster}), bases de datos replicadas, balanceo de cargas con tolerancia
+  a fallos, etcétera.
 
 \item Contar con un esquema de control de versiones que soporte el trabajo de
   múltiples usuarios al mismo tiempo.
@@ -80,11 +81,11 @@ detallados a continuación.
 
 \item Contar con pantallas de configuración que permitieran a los
   administradores de la herramienta tener un mayor control sobre los procesos y
-  los usuarios. Así mismo, que fuera una herramienta visualmente fácil de usar.
+  los usuarios. Así mismo, que fuera una herramienta fácil de usar visualmente.
 
 \item Permitir a la nueva herramienta la convivencia con las tecnologías con las
   que contaba la institución financiera (Windows 2003, SQL Server 2005, Oracle,
-  DB2, AS400, Windows Vista y Mainframes)
+  DB2, AS400, Windows Vista y \emph{Mainframes}).
 
 \item Contar con una herramienta de fácil manejo de metadatos.
 
@@ -97,7 +98,7 @@ detallados a continuación.
 
 \item Generar componentes reutilizables entre aplicaciones y entre procesos.
 
-\item La herramienta debía permitir a los usuarios, la creación de funciones
+\item La herramienta debía permitir a los usuarios la creación de funciones
   personalizadas que cumplieran con los estándares de la empresa y que no fueran
   parte de las configuraciones predefinidas de la herramienta.
 
@@ -143,7 +144,7 @@ seleccionar la herramienta fueron los siguientes:
 \begin{itemize}
 
 \item Mejorar el rendimiento de la extracción de datos de 90 minutos a 45
-  minutos (tiempo tentativo) con una cantidad de 6 millones de registros
+  minutos (tiempo tentativo) con una cantidad de 6 millones de registros.
 
 \item Mejorar el tiempo de transformación de datos utilizando componentes para
   limpieza y calidad de los datos.
@@ -152,14 +153,15 @@ seleccionar la herramienta fueron los siguientes:
   los 100 millones de registros.
 
 \item Que la arquitectura de la herramienta fuera compatible con la arquitectura
-  de la institución y la futura que se planteó en el presente proyecto.
+  de la institución y la arquitectura futura que se planteó en el presente
+  proyecto.
 
 \item La herramienta debía ser capaz de poder integrarse son los sistemas de la
   institución (PeopleSoft, Core bancario, sistema de reportes, sistema de
-  recursos humanos, pagos a terceros, etc.)
+  recursos humanos, pagos a terceros, etcétera.)
 
 \item La herramienta debía ser capaz de ejecutarse en diferentes plataformas
-  (Windows, Linux, Unix, Mainframes).
+  (Windows, Linux, Unix, \emph{Mainframes}).
 
 \item Conectividad con los sistemas fuente (ODBC, OLAP, LDAP) y con diferentes
   sistemas manejadores de bases de datos como Oracle, DB2, SQL Server, Informix,
@@ -170,9 +172,9 @@ seleccionar la herramienta fueron los siguientes:
   ETL.
 \end{itemize}
 
-Aunque el gobierno de datos no era parte del alcance del proyecto, pero si de la
-estrategia de crecimiento de la institución, la herramienta debería de soportar
-esta funcionalidad.
+Aunque el gobierno de datos no era parte del alcance del proyecto, sí era parte
+de la estrategia de crecimiento de la institución, y por ello la herramienta
+debería de soportar esta funcionalidad.
 
 \section{Criterios de evaluación}
 
@@ -286,13 +288,13 @@ siguiente tabla con los resultados finales:
         & \textbf{3.75}
         & \textbf{4} \\
         \hline
-        \rightline{Escalabilidad y rendimiento} & & 4 & 4 & 5 & 5 & 4 & 4 \\
+        Escalabilidad y rendimiento & & 4 & 4 & 5 & 5 & 4 & 4 \\
         \hline
-        \hspace{0.5cm}Alta disponibilidad & & 4 & 3 & 4 & 4 & 4 & 3 \\
+        Alta disponibilidad & & 4 & 3 & 4 & 4 & 4 & 3 \\
         \hline
-        \rightline{Seguridad} & & 3 & 4 & 5 & 3 & 4 & 5 \\
+        Seguridad & & 3 & 4 & 5 & 3 & 4 & 5 \\
         \hline
-        \hspace{0.5cm}Plataformas de ejecución soportadas
+        Plataformas de ejecución soportadas
         & & 1 & 3 & 4 & 4 & 3 & 4 \\
         \hline
         \rowcolor[gray]{0.9}\textbf{Opciones de integración}
@@ -491,8 +493,8 @@ explicita de la institución.
 
 La recomendación proporcionada por Accenture fue Informática debido a que al ser
 una empresa independiente enfocada a la integración de datos, no estaba casado
-con ninguna base de datos específica, como si lo están el resto de los
-participantes , y esto permitiría una mejor integración a las necesidades de la
+con ninguna base de datos específica, como sí lo están el resto de los
+participantes, y esto permitiría una mejor integración a las necesidades de la
 institución. Basados en esta recomendación la institución financiera se decidió
 por esta solución para implementar sus nuevos procesos ETL.
 
@@ -503,8 +505,8 @@ de crecimiento dentro de la organización. Las fortalezas identificadas en la
 compañía son:
 
 \begin{itemize}
-\item Uso de una sola herramienta de ETL (Microsoft SQL 2005)
-\item Plataforma empresarial estandarizada (Microsoft)
+\item Uso de una sola herramienta de ETL (Microsoft SQL 2005).
+\item Plataforma empresarial estandarizada (Microsoft).
 \item Las personas involucradas en el proyecto contaban con el conocimiento del
   negocio, aplicaciones y datos, necesarios para el desarrollo del mismo.
 \item Se tiene una claridad en las necesidades del negocio e inclusive existen
@@ -518,9 +520,9 @@ correcta. Dichas debilidades se mencionan a continuación:
 
 \begin{itemize}
 \item Se requería un mayor entendimiento del proceso de extracción de
-  información
+  información.
 \item Mejorar la calidad de datos que se enviaban a los sistemas destino.
-\item No se contaba con un proceso de limpieza de datos en el sistema origen
+\item No se contaba con un proceso de limpieza de datos en el sistema origen.
 \item No se tenía un proceso de identificación de errores y su correspondiente
   solución.
 \item No se tenía un esquema de gobierno de datos ni manejo de datos maestros.
@@ -529,8 +531,8 @@ correcta. Dichas debilidades se mencionan a continuación:
 Una vez identificadas las fortalezas y debilidades dentro de la compañía a nivel
 funcional, también se realizó un análisis de las capacidades tecnológicas con
 las que se contaba. Principalmente se enfocó el proyecto a las capacidades del
-flujo de datos, es decir, aquellas herramientas tecnológicas que no permitían un
-flujo de datos eficiente entre en sistema central y los sistemas destino. La
+flujo de datos; es decir, aquellas herramientas tecnológicas que no permitían un
+flujo de datos eficiente entre el sistema central y los sistemas destino. La
 identificación de ventajas y desventajas dentro del flujo de datos nos permitió
 enfocarnos en aquellos componentes que tenían que ser atendidos de inmediato.
 
@@ -573,12 +575,12 @@ compañía con los cuales Accenture había conversado. Con base en las
 conversaciones se definieron los siguientes requerimientos tanto funcionales
 como técnicos.
 
-\textbf{Requerimientos funcionales de negocio}
+\subsection{Requerimientos funcionales de negocio}
 
 \begin{enumerate}
 
 \item Analizar cada uno de los datos que están siendo extraídos de los sistemas
-  origen por cada uno de los procesos ETL implementados en el compañía.
+  origen por cada uno de los procesos ETL implementados en la compañía.
 
 \item Implementar procesos de limpieza de datos durante la extracción del
   sistema
@@ -588,11 +590,11 @@ como técnicos.
   \item Substitución de las abreviaturas existentes en los nombres; por ejemplo:
     Ma; el cuál es interpretado como María.
   \item Realizar la depuración de los RFCs de los usuarios ya sea agregando o
-    eliminando caracteres para que este sea correcto.
+    eliminando caracteres para que éste sea correcto.
   \end{itemize}
 
 \item Realizar los siguientes procesos de transformación durante la extracción
-  de datos del sistema origen
+  de datos del sistema origen:
 
   \begin {itemize}
   \item Transformación del formato de fecha Juliano a formato DD/MM/AAAA.
@@ -621,7 +623,7 @@ como técnicos.
   interfaz gráfica en lugar de realizar la consulta y actualización de ese valor
   de forma manual de ese valor después de acceder al sitio del SAT.
 
-\item Por necesidades del negocio y debido a que dentro del plan estrátegico de
+\item Por necesidades del negocio y debido a que dentro del plan estratégico de
   la compañía está previsto el inicio de operaciones en otros países, será
   requerido el desarrollo de catálogos de información que tengan datos y
   códigos sobre el tipo de moneda, ciudades, estados, países, y códigos
@@ -659,30 +661,28 @@ descritos a continuación:
 
 \begin{itemize}
 
-\item RFC. Se requería que el RFC se encontrara estandarizado y cumplieran con
-  los requerimientos establecidos por el buró de crédito
+\item \textbf{RFC}. Se requería que el RFC se encontrara estandarizado y
+  cumplieran con los requerimientos establecidos por el buró de crédito
 
-\item Nombres de socios. Se requería que los nombres de socios no tuvieran
-  caracteres especiales como puntos, comas, retornos de carro, paréntesis,
-  corchetes, porcentaje, comillas y caracteres de 16 bits.
+\item \textbf{Nombres de socios}. Se requería que los nombres de socios no
+  tuvieran caracteres especiales como puntos, comas, retornos de carro,
+  paréntesis, corchetes, porcentaje, comillas y caracteres de 16 bits.
 
-\item Fechas de morosidad. Se solicitó que las fechas para el cálculo de la
-  morosidad se encontraran en un formato de fecha correcto yyyymmdd y que no se
-  permitieran valores nulos o negativos para este tipo de dato.
+\item \textbf{Fechas de morosidad}. Se solicitó que las fechas para el cálculo
+  de la morosidad se encontraran en un formato de fecha correcto yyyymmdd y que
+  no se permitieran valores nulos o negativos para este tipo de dato.
 
-\item Direcciones de socios. Fue requerido que las direcciones de los socios
-  tuvieran una nomenclatura estándar para nombres de calles, colonias
+\item \textbf{Direcciones de socios}. Fue requerido que las direcciones de los
+  socios tuvieran una nomenclatura estándar para nombres de calles y colonias.
 
-\item Ciudades/Municipios. Los códigos y nombres de ciudades y municipios debían
-  de contar con un estándar y estos deberían de estar corregidos de a cuerdo a
-  la información proporcionada por SEPOMEX.
+\item \textbf{Ciudades/Municipios}. Los códigos y nombres de ciudades y
+  municipios debían de contar con un estándar y estos deberían de estar
+  corregidos de a cuerdo a la información proporcionada por SEPOMEX.
 
-\item Teléfonos. Los teléfonos de los clientes debían contar con la clave lada y
-  todos tenían que ser de 10 dígitos para números fijos y de 13 dígitos para
-  números celulares
-
-\item Los números telefónicos no deberían de tener guiones o caracteres
-  especiales.
+\item \textbf{Teléfonos}. Los teléfonos de los clientes debían contar con la
+  clave lada y todos tenían que ser de 10 dígitos para números fijos y de 13
+  dígitos para números celulares. Los números telefónicos no deberían de tener
+  guiones o caracteres especiales.
 
 \end{itemize}
 
