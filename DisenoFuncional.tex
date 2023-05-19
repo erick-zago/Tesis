@@ -3,65 +3,64 @@
 
 En este capítulo...
 
-\section{Arquitectura de aplicaciones (alto nivel)}
+\section{Arquitectura de aplicaciones de alto nivel}
 
 La arquitectura definida para las aplicaciones destino y fuente que se
-consideraron dentro del alcance del proyecto se muestran en la siguiente figura;
-dentro de esta arquitectura de aplicaciones se consideró el proceso ETL que se
-construyó.
+consideraron dentro del alcance del proyecto se muestran en la
+figura~\ref{fig:arquitectura}; dentro de esta arquitectura de aplicaciones se
+consideró el proceso ETL que se construyó.
 
 \begin{figure}[htb]
   \begin{center}
-    \includegraphics[width=12cm, height=3cm, scale=0.5]{Arquitectura.jpg}
+    \includegraphics[width=0.7\linewidth]{Arquitectura.jpg}
         \caption{Arquitectura de aplicaciones.}
     \label{fig:arquitectura}
   \end{center}
 \end{figure}
 
-La arquitectura definida contenía al core bancario como sistema fuente de
+La arquitectura definida contenía al núcleo bancario como sistema fuente de
 información y enviaba la información a la herramienta ETL seleccionada para
 realizar los procesos de extracción, transformación, clasificación y carga hacia
 los sistemas destino y hacia cada uno de los tipos de datos que necesitaban los
 equipos y bases de datos destino.
 
-\section{Arquitectura de aplicaciones (arquitectura detallada)}
+\section{Arquitectura de aplicaciones detallada}
 
-La arquitectura diseñada se encontraba dividida en cuatro capas y representan el
-flujo de información entre cada una de dichas capas. La capa de interfaz de
-usuario donde se realizaron todas las tareas de monitoreo, manejo de la
-herramienta y visualización de datos en el sistema destino. La capa de
-presentación únicamente contenía el servidor de correo que envía la información
-a la capa de interfaz de usuario. Por su parte la capa de integración contenía
-los procesos de la herramienta ETL; así como la base de datos \emph{stage} y la
-base de datos de catálogos; esta capa también incluía a las aplicaciones que
-enviaban información complementaria a los sistemas destino. Finalmente
-contábamos con la capa de datos que contenía a los sistemas destino, el sistema
-fuente y al servidor de control de usuarios a través del directorio activo. La
-funcionalidad de cada capa así como el flujo de datos se describen a
-continuación.
+La arquitectura diseñada se encontraba dividida en cuatro capas que representan
+el flujo de información entre cada una de ellas. La capa de interfaz de usuario
+donde se realizaron todas las tareas de monitoreo, manejo de la herramienta y
+visualización de datos en el sistema destino. La capa de presentación únicamente
+contenía el servidor de correo que envía la información a la capa de interfaz de
+usuario. Por su parte la capa de integración contenía los procesos de la
+herramienta ETL; así como la base de datos \emph{stage} y la base de datos de
+catálogos; esta capa también incluía a las aplicaciones que enviaban información
+complementaria a los sistemas destino. Finalmente contábamos con la capa de
+datos que contenía a los sistemas destino, el sistema fuente y al servidor de
+control de usuarios a través del directorio activo. La funcionalidad de cada
+capa así como el flujo de datos se describen a continuación.
 
 \subsection{Capa de datos}
 
 La capa de datos contenía diferentes funcionalidades dependiendo del servidor de
-datos del que estemos hablando. El core bancario tenía la funcionalidad de
-enviar datos a la herramienta ETL a través del protocolo TCP\/IP. Por sus parte
+datos del que estemos hablando. El núcleo bancario tenía la funcionalidad de
+enviar datos a la herramienta ETL a través del protocolo TCP/IP. Por sus parte
 el directorio activo al manejar información de los usuarios de la herramienta
 tenía la funcionalidad de autenticar a cada usuario que accedía a la herramienta
 otorgándole los permisos necesarios para ejecutar las tareas dentro de la
-herramienta ETL, la comunicación entre la herramienta ETL y el directorio activo
+herramienta ETL; la comunicación entre la herramienta ETL y el directorio activo
 se realizó mediante el protocolo LDAP.
 
 Por su parte los sistemas destino deberían de tener la capacidad de recibir los
-datos de parte de la herramienta ETL; así como de parte de los ETL's actuales de
-la institución financiera y que complementaban la información del core bancario;
-los sistemas destino reciben los datos mediante el protocolo TCP/IP
+datos de parte de la herramienta ETL; así como de parte de los ETLs actuales de
+la institución financiera y que complementaban la información del núcleo
+bancario; los sistemas destino reciben los datos mediante el protocolo TCP/IP
 independientemente de la herramienta ETL que los envíe.
 
 \subsection{Capa de integración}
 
 La capa de integración tiene la funcionalidad de integrar los datos entre las
 diferentes aplicaciones; la herramienta ETL contiene todos los servicios para la
-extracción de datos del core bancario, transformarlos y cargarlos en los
+extracción de datos del núcleo bancario, transformarlos y cargarlos en los
 diferentes sistemas destino de la capa de datos. La herramienta ETL tiene la
 funcionalidad de enviar los datos a la base de datos \emph{stage}\footnote{Las
   bases de datos llamadas \emph{stage} son bases de datos temporales o de paso
@@ -70,7 +69,7 @@ datos de catálogos. El proceso debía enviar vía FTP los archivos de texto a u
 dirección específica dentro de un servidor para que el ETL del sistema
 antilavado tome los archivos y complemente la información que será enviada vía
 TCP/IP a la aplicación de usuario final. A su vez, el proceso ETL también envía
-información a uno de los ETL's del sistema de reportes para que sea
+información a uno de los ETLs del sistema de reportes para que sea
 complementada por parte del sistema de conciliación bancaria y sea enviada a la
 base de datos final de reportes.
 
@@ -93,14 +92,14 @@ construir y diseñar sus propios elementos.
 \section{Tecnología conceptual}
 
 A continuación definiremos el diseño conceptual de la arquitectura usada para el
-proyecto, este diseño conceptual está dividido en cinco grandes áreas: Ambiente
+proyecto, este diseño conceptual está dividido en cinco grandes áreas: ambiente
 de desarrollo, herramienta ETL, ambiente de operación, aplicaciones de la
 institución financiera y la capa de infraestructura; de cada una de ellas
-hablaremos durante este capitulo.
+hablaremos durante este capítulo.
 
 \begin{figure}[htb]
   \begin{center}
-    \includegraphics[width=12cm, height=4.5cm, scale=0.5]{Tecnologia_Conceptual.jpg}
+    \includegraphics[width=\linewidth]{Tecnologia_Conceptual.jpg}
         \caption{Tecnología conceptual.}
     \label{fig:conceptual}
   \end{center}
@@ -131,8 +130,8 @@ los siguientes componentes:
   realizar este desarrollo se deberá de basar en el diseño funcional, en las
   reglas de transformación y en las reglas de negocio definidas dentro del
   propio diseño. El proceso de extracción para la primera iteración fue
-  solamente del Core Bancario ICBS, mientras que las transformaciones y la carga
-  se realizó de acuerdo al sistema al que se cargaron los datos.
+  solamente del núcleo bancario ICBS, mientras que las transformaciones y la
+  carga se realizó de acuerdo al sistema al que se cargaron los datos.
 
 \item \textit{Procesos de instalación}: Los procesos de instalación se refieren
   a los procesos a seguir para instalar el ETL dentro de los diferentes
@@ -186,8 +185,8 @@ integración y la capa que contenía las reglas de negocio.
   \item \textbf{Servicios}. Servicios necesarios para el manejo de errores,
     excepciones, versiones, así como servicios adicionales necesarios para los
     procesos de extracción, transformación y carga. Tales servicios se
-    dividieron en: Administración de excepciones, reinicio y recuperación de
-    errores, registros de eventos y auditoria y administración de versiones.
+    dividieron en: administración de excepciones, reinicio y recuperación de
+    errores, registros de eventos y auditoría y administración de versiones.
   \item \textbf{Modelado de procesos}. Fueron principalmente los procesos
     necesarios para la creación de los programas ETL.
   \end{itemize}
@@ -219,7 +218,7 @@ integración y la capa que contenía las reglas de negocio.
 
 La capa de datos estaba conformada por los diferentes sistemas desde donde se
 extrajo la información así como los sistemas donde se almacenarían los
-datos. Como sistema para extracción de datos solo se consideró un sistema,
+datos. Como sistema para extracción de datos sólo se consideró un sistema,
 mientras que la carga se realizó hacia tres diferentes sistemas de la
 institución financiera. A continuación describo el tipo de información que se
 procesaba en cada uno de los sistemas destino:
