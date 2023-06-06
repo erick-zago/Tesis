@@ -1,8 +1,7 @@
 \chapter{Análisis de requerimientos}
 \label{cap:analisis}
 
-En este capítulo se identifica el proceso de selección de software para el
-proyecto así como el análisis de los requerimientos técnicos y funcionales.
+En este capítulo se detallan los requerimientos técnicos y funcionales del proyecto, así como el proceso de selección de software requerido para atender a las necesidades de la institución financiera.
 
 \section{Proceso de selección de software}
 
@@ -32,19 +31,18 @@ Este proceso se detalla en la figura~\ref{fig:proceso}:
   \end{center}
 \end{figure}
 
-En las siguientes secciones se definirán cada uno de los pasos del proceso
-seguidos.
+En las siguientes secciones se definirán cada uno de los pasos del proceso.
 
 \subsection{Requerimientos de funcionalidad del software}
 
 Con base en las reuniones realizadas con el área de desarrollo de sistemas de la
-institución financiera se identificaron una serie de requerimientos funcionales
-detallados a continuación.
+institución financiera se identificaron una serie de requerimientos que debía de cumplir la herramienta seleccionada.
+Estos requerimientos se detallan a continuación.
 
 \begin{itemize}
 
-\item Se requería una conexión a correo electrónico mediante le protocolo SMTP
-  para envío de informes de termino de procesos o de error en los mismos.
+\item Se requería una conexión a correo electrónico mediante el protocolo SMTP
+  para envío de informes de termino de procesos o de errores en los mismos.
 
 \item Tener una bitácora (\emph{log}) de procesos que tuviera la información de
   cada uno de los procesos de extracción/carga (inicio, fin, estado de término,
@@ -114,7 +112,7 @@ detallados a continuación.
   requerimiento era para cumplir con el plan estratégico de la institución.
 
 \item Capacidad de la herramienta para publicar procesos como \emph{Web
-    Services} a fin de poder acceder a ellos de manera remota o ejecutarlos a
+\    Services} a fin de poder acceder a ellos de manera remota o ejecutarlos a
   través de un portal con los permisos correspondientes.
 
 \item Capacidades de detección y corrección de errores en los procesos, mediante
@@ -211,7 +209,7 @@ fue dar una lista larga de proveedores candidatos para ser evaluados y que en
 ese momento eran las mejores opciones dentro del mercado. La lista contenía a 6
 proveedores de software: Oracle (Oracle Warehouse Builder), Informática (Power
 Center), IBM (Infosphere Information Server), Microsoft (Integration Services
-(SSIS), SAP (SAP-Business Objects), SAS Institute (SAS).
+SSIS), SAP (SAP-Business Objects), SAS Institute (SAS).
 
 \subsection{Evaluación de proveedores}
 
@@ -257,7 +255,7 @@ criterios de evaluación
 \end{table}
 
 La prioridad de cada uno de los criterios de evaluación se realizó con base en
-las necesidades de la institución y basados también en la funcionalidad de cada
+las necesidades de la institución y en la funcionalidad de cada
 uno de ellos.
 
 Con toda la información que se recolectó, realicé un análisis de cada proveedor
@@ -498,7 +496,7 @@ participantes, y esto permitiría una mejor integración a las necesidades de la
 institución. Basados en esta recomendación la institución financiera se decidió
 por esta solución para implementar sus nuevos procesos ETL.
 
-\section{Análisis de fortalezas y debilidades}
+\section{Análisis de fortalezas y debilidades de la institución financiera}
 
 Durante el proyecto se identificaron fortalezas así como mejoras y oportunidades
 de crecimiento dentro de la organización. Las fortalezas identificadas en la
@@ -515,7 +513,7 @@ compañía son:
 \end{itemize}
 
 Por otra parte se identificaron debilidades dentro de la organización que no
-permiten un mejor manejo de la información y explotarla de manera
+permitían un mejor manejo de la información así como explotarla de manera
 correcta. Dichas debilidades se mencionan a continuación:
 
 \begin{itemize}
@@ -557,7 +555,7 @@ ser:
 \begin{enumerate}
 \item Extracción de datos del sistema central una sola vez y con un único
   proceso ETL.
-\item Creación de un mapeo entre sistema origen y destino.
+\item Creación de un mapeo de datos entre sistema origen y destino.
 \item En fases posteriores tener un esquema de manejo de datos maestros; así
   como limpieza y calidad en los datos extraídos y almacenados.
 \item Contar con un sistema de gobierno de datos.
@@ -588,7 +586,7 @@ como técnicos.
   \begin {itemize}
   \item Eliminación de caracteres especiales en los nombres de los usuarios.
   \item Substitución de las abreviaturas existentes en los nombres; por ejemplo:
-    Ma; el cuál es interpretado como María.
+    "Ma."; el cuál es interpretado como María.
   \item Realizar la depuración de los RFCs de los usuarios ya sea agregando o
     eliminando caracteres para que éste sea correcto.
   \end{itemize}
@@ -597,8 +595,8 @@ como técnicos.
   de datos del sistema origen:
 
   \begin {itemize}
-  \item Transformación del formato de fecha Juliano a formato DD/MM/AAAA.
-  \item Transformación del tipo de dato (numérico, decimal, fecha, carácter,
+  \item Transformación del formato de fecha Juliana a formato DD/MM/AAAA.
+  \item Transformación del tipo de dato (numérico, decimal, fecha, caracter,
     booleano).
   \end{itemize}
 
@@ -615,7 +613,7 @@ como técnicos.
   esto con la finalidad de optimizar los tiempos de extracción de datos que
   realiza cada desarrollo ETL.
 
-\item Se requiere que los 20 archivos planos requeridos sean originados por la
+\item Se requiere que los 20 archivos planos generados actualmente sean originados por la
   herramienta ETL que se implementará.
 
 \item Para la generación del archivo \textit{Currency\_Exchange.txt} se requiere

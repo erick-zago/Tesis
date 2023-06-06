@@ -1,7 +1,8 @@
 \chapter{Diseño detallado}
 \label{cap:diseno-detallado}
 
-En este capítulo...
+En este capítulo se presenta el diseño detallado de la solución implementada en el proyecto. 
+Se detalla el proceso de extracción, transformación y carga de información.
 
 \section{Dependencias y frecuencia de las extracciones de datos}
 
@@ -14,11 +15,12 @@ financiera la información se actualizaba de manera diaria. La herramienta ETL
 nos permitió identificar aquellas tablas y campos que sufrían modificaciones, de
 tal forma que se extrajo sólo la información que sufría cambios a lo largo del
 día. La extracción de datos se realizó en un horario no operativo, a fin de no
-afectar la operación de la institución; además este proceso dependía del termino
-del proceso de cierre diario de operaciones. Solamente una vez que el proceso
-hubiera terminado comenzaba la extracción por parte de la herramienta ETL; este
-proceso contaba con una ventana de procesamiento de 5 horas. La extracción fue
-almacenada en la base de datos temporal dentro de la herramienta ETL.
+afectar la transaccionalidad de la institución; además este proceso dependía del
+término del proceso de cierre diario de operaciones. Solamente una vez que el
+proceso hubiera terminado comenzaba la extracción por parte de la herramienta
+ETL; este proceso contaba con una ventana de procesamiento de 5 horas. La
+extracción fue almacenada en la base de datos temporal dentro de la herramienta
+ETL.
 
 \subsection{Extracción inicial}
 
@@ -71,7 +73,7 @@ de información; socios, cuentas, créditos y saldos.
 \section{Diseño para la transformación de datos}
 
 La transformación de los datos tenía varios procesos que se deberían seguir,
-entre los cuales se encuentra la limpieza de datos, los estándares y
+entre los cuales se encontraba la limpieza de datos, los estándares y
 procedimientos utilizados, así como las reglas de transformación definidas para
 cada uno de los sistemas destino. La transformación de los datos se realizó
 dentro de la misma base de datos de paso y se almacenó en otra instancia de esta
