@@ -1,113 +1,178 @@
 \chapter{Estándares de programación}
 \label{cap:estandares}
 
-La convención de nombres tiene la ventaja de mejorar la lectura y comprensión de la aplicación tanto para 0
-el desarrollo como para el mantenimiento; así mismo, tiene soporte para ciertos aspectos de la operación 
-debido a que permite una mejor interpretación de la información contenida en cada elemento de la base de datos 
-o procesos de ETL. Varios aspectos son posibles o más fáciles si se tienen definidos los estándares y convenciones 
-de nombres:
+La convención de nombres tiene la ventaja de mejorar la lectura y comprensión de
+la aplicación, tanto para el desarrollo como para el mantenimiento; así mismo,
+tiene soporte para ciertos aspectos de la operación debido a que permite una
+mejor interpretación de la información contenida en cada elemento de la base de
+datos o procesos de ETL. Varios aspectos son posibles o más fáciles si se tienen
+definidos los estándares y convenciones de nombres:
 
 \begin{itemize}
-\item Actualizaciones (Cambio de versiones) a la base de datos o software.
+\item Actualizaciones (cambio de versiones) a la base de datos o software.
 \item Cambio al modelo de datos físico o lógico.
 \item Mover una aplicación de un servicio a otro.
-\item Mejor administración de la base de datos (uso de utilerias y scripts)
+\item Mejor administración de la base de datos (uso de utilerías y
+  \emph{scripts}).
 \end{itemize}
 
 Los aspectos que serán cubiertos en este capitulo serán:
 
 \begin{itemize}
-    \item Lineamientos de base de datos.
-    \item Uso de nombres y convenciones.
-    \item Reglas para crear nombres de los objetos de bases de datos.
-    \item Recomendaciones para crear nombres de proyectos.
+\item Lineamientos de la base de datos.
+\item Uso de nombres y convenciones.
+\item Reglas para crear nombres de los objetos de las bases de datos.
+\item Recomendaciones para crear nombres de proyectos.
 \end{itemize}
 
 \section{Lineamientos de base de datos}
 
-Algunos de los lineamientos que se siguieron al momento de realizar la construcción de la base de datos se enlistan a continuación:
+Algunos de los lineamientos que se siguieron al momento de realizar la
+construcción de la base de datos se enlistan a continuación:
+
 \begin{enumerate}
-\item En cada construcción de consultas, se verificó siempre los planes de ejecución; es decir, reducir al máximo 
-el uso de memoria y capacidad de las máquinas. Además evitar que las consultas repondieran con escaneo de índices(\textit{index scan}) 
-o escaneo de tablas (\textit{table scan}). 
-\item Evitar el uso de la sentencia \textit{WHERE...IN} y utilizar \textit{WHERE EXIST}.
-\item Evitar el uso del \textit{OR} y sustituirlo por otro tipo de consulta o por la sentencia \textit{CASE}.
-\item Evitar hacer uso de los operadores como \textit{NOT} o \<\>
-\item En la ejecución de consultas, después de la sentencia \texit{WHERE}, hacer siempre referencia a las columnas con índices.
-\item En sentencias de inserción de registros \texit{INSERT} siempre colocar el nombre de las columnas. Lo anterior ayuda a evitar 
-problemas de carga/inserción derivado de cambios en la estructura de la tabla.
-\item Evitar el uso de comodines; es decir, escribir siempre el nombre de las columnas requeridas para reducir el tráfico en la red.
-\item Mantener las sentencias SQL lo más pequeñas posibles.
-\item Para el proceso de carga masiva de datos, se recomendó borrar primero los índices antes de iniciar la carga y reconstruyéndolos al final del proceeso.
+
+\item En cada construcción de consultas, se verificó siempre los planes de
+  ejecución; es decir, reducir al máximo el uso de memoria y capacidad de las
+  máquinas. Además evitar que las consultas repondieran con escaneo de índices
+  (\texttt{index scan}) o escaneo de tablas (\texttt{table scan}).
+
+\item Evitar el uso del enunciado \texttt{WHERE ... IN} y utilizar \texttt{WHERE
+    EXIST}.
+
+\item Evitar el uso del \texttt{OR} y sustituirlo por otro tipo de consulta o
+  por el enunciado \texttt{CASE}.
+
+\item Evitar hacer uso de los operadores como \texttt{NOT} o
+  \texttt{\textless\textgreater}.
+
+\item En la ejecución de consultas, después del enunciado \texttt{WHERE}, hacer
+  siempre referencia a las columnas con índices.
+
+\item En enunciados de inserción de registros (\texttt{INSERT}) siempre colocar
+  el nombre de las columnas. Lo anterior ayuda a evitar problemas de
+  carga/inserción derivado de cambios en la estructura de la tabla.
+
+\item Evitar el uso de comodines; es decir, escribir siempre el nombre de las
+  columnas requeridas para reducir el tráfico en la red.
+
+\item Mantener los enunciados SQL lo más concisos posibles.
+
+\item Para el proceso de carga masiva de datos, se recomendó borrar primero los
+  índices antes de iniciar la carga, reconstruyéndolos al final del proceeso.
+
 \item Siempre comentar el código generado.
-\item No usar el prefijo "\_sp" para nombrar procedimientos alamacenados (\textit{Stored procedures}).
+
+\item No usar el prefijo ``\texttt{\_sp}'' para nombrar procedimientos
+  alamacenados (\texttt{stored procedures}).
+
 \item Uso de limitadores en la obtención de registros de cualquier tabla.
-\item Evitar el uso de tablas temporales en el procesamiento de datos. En algunos casos se utilizaron tablas temporales en lugar de consultas complejas.
-\item Evitar el uso de cursores. En su lugar se utilizaron sentencias \textit{WHILE}.
-\item Después de la cláusula \textit{ORDER BY}, poner el nombre de las columnas en lugar de valores numericos que hagan referencia al orden de las columnas.
+
+\item Evitar el uso de tablas temporales en el procesamiento de datos. En
+  algunos casos se utilizaron tablas temporales en lugar de consultas complejas.
+
+\item Evitar el uso de cursores. En su lugar se utilizaron enunciados
+  \texttt{WHILE}.
+
+\item Después de la cláusula \texttt{ORDER BY}, poner el nombre de las columnas
+  en lugar de valores numericos que hagan referencia al orden de las columnas.
+
 \item Cumplir con los estándares definidos para la base de datos.
+
 \end{enumerate}
 
 \section{Reglas para crear nombres de objetos en la base de datos}
 
-Las siguientes reglas fueron definidas para realizar objetos dentro de la base de datos:
+Las siguientes reglas fueron definidas para realizar objetos dentro de la base
+de datos.
 
-\textbf{Caracteres}
-\begin{itemize}[*]
-\item Los nombres de los elementos debían consistir solamente de letras(A\-Z), números (0\-9) y guión bajo (\_).
-\item Los nombres no debían tener espacios.
-\item Los nombres no debían tener comas o comillas
+\begin{itemize}
+
+\item \textbf{Caracteres.} Se debía cumplir que:
+
+  \begin{itemize}
+  \item Los nombres de los elementos debían consistir solamente de letras(A-Z),
+    números (0-9) y guión bajo (\_).
+  \item Los nombres no debían tener espacios.
+  \item Los nombres no debían tener comas o comillas
+  \end{itemize}
+
+\item \textbf{Longitud.} Si bien la longitud de los nombres es propia de cada
+  herramienta de software, en el caso de Oracle no puede ser mayor a 30 bytes
+  con las siguientes excepciones: nombre de base de datos hasta 8 bytes y nombre
+  de ligas de base de datos hasta 128 bytes.
+
+\item \textbf{Palabras reservadas.} No estaba permitido el uso de palabras
+  reservadas.
+
+\item \textbf{Separadores.} Uso del caracter `\texttt{\_}' para nombres de
+  objetos de base de dato que estuvieran compuestos de varias palabras. No usar
+  `\texttt{\_}' en el nombre de la base de datos.
+
+\item \textbf{Identificadores numericos (\#\#).} En las convenciones de números,
+  el símbolo \texttt{\#\#} es usado muchas veces para indicar que varios objetos
+  de la base de datos deben de diferenciarse unos de otros.
+
 \end{itemize}
-
-\textbf{Longitud}
-Si bien la longitud de los nombres es propia de cada herramienta de software, en el caso de Oracle no puede ser mayor a 30 bytes con las 
-siguientes excepciones: Nombre de base de datos hasta 8 bytes y nombre de ligas de base de datos hasta 128 bytes.
-
-\textbf{Palabras reservadas}
-No estaba permitido el uso de palabras reservadas.
-
-\textbf{Separadores}
-Uso del caracter "\_" para nombres de objetos de base de dato que estuvieran compuestos de varias palabras. No usar "\_" en el nombre de la base de datos.
-
-\textbf{Identificadores numericos (##)}
-En la convenciones de números, el símbolo \#\# es usado muchas veces para indicar que varios objetos de la base de datos deben de diferenciarse 
-unos de otros.
-
 
 \section{Recomendaciones para crear nombres de proyectos}
-Una de las metas de utilizar convenciones de nombres es hacer qeu los nombres utilizados sean lo más simple posibles 
-ya que el nombre debe ser fácil de recordar y debe seguir ciertas reglas que sean igualmente fáciles de explicar. 
 
-Las siguientes reglas no fueron obligatorias para el proyecto, pero se tomaron algunas de sus recomendaciones.
+Una de las metas de utilizar convenciones de nombres es hacer que los nombres
+utilizados sean lo más simple posible, ya que el nombre debe ser fácil de
+recordar y debe seguir ciertas reglas que sean igualmente fáciles de explicar.
 
-\textbf{Nombres de proyectos}
-Para la definición de nombres se deben cumplir dos metas principales: el nombre del objeto debe ser tan corto como sea posible y 
-debe ser autodescriptivo. Una regla que hay que seguir es que cuándo el nombre no pueda ser corto se debe elegir un nombre autodescriptivo 
-pensando en que propablemente no sea la misma persona la que realice la implementación o el mantenimiento.
+Las siguientes reglas no fueron obligatorias para el proyecto, pero se tomaron
+algunas de sus recomendaciones.
 
 \begin{itemize}
-\item \textbf{Verbos.} Si los nombres de los objetos contienen un verbo, siempre se tiene que iniciar la palabra con él. Por ejemplo
-es mejor decir \textit{Buscar\_Nombre\_Cliente} que \textit{Nombre\_Cliente\_Buscar}.
-\item \textbf{Palabras simples.} Utilizar palabras simples para describir un objeto. Usar \textit{Buscar\_Complemento} o solo \textit{Complemento} 
-en lugar de \textit{Buscar\_Y\_Complementar}.
-\item \textbf{Expresiones cotidianas.} Las expresiones cotidianas no deben ser usadas ya que pueden causar confusión al momento de leer o implementar.
-\item \textbf{Uso de formas singulares y plurales.} Las formas singulares son más comunes que las plurales en el uso diario; son mas cortas 
-y simples de entender, por lo que es recomendable usarlas en lugar de las plurales. Como una regla de consistencia, cuando se define el 
-nombre de la base de datos se puede utilizar la forma singular o plurar, pero no ambas.
-\tem \textbf{Uso de abreviaciones.} Si es necesario tener que usar abreviaciones, las siguientes recomendaciones nos pueden ayudar a 
-definir una buena abreviación (tomaremos como ejemplo la palabra ERROR).
-\begin{itemize}
-\item Obtener todas las consonantes o caracteres especiales de la palabra (ERROR sería RRR).
-\item Si la palabra original comienza con vocal, mantener la vocal en su lugar (ERROR sería ERRR).
-\item Si la regla antes descrita resulta en una abreviación que contiene más de dos consonantes idénticas, solo dos consonantes deben permanecer (ERROR sería ERR).
-\item Si el resultado de la abreviación es díficil de entender, usar una abreviación que sea más comprensible. Por ejemplo usar PROD para describir producto en lugar de PRDCT.
+
+\item \textbf{Nombres de proyectos.} Para la definición de nombres se deben
+  cumplir dos metas principales: el nombre del objeto debe ser tan corto como
+  sea posible y debe ser autodescriptivo. Una regla que hay que seguir es que
+  cuando el nombre no pueda ser corto se debe elegir un nombre autodescriptivo
+  pensando en que probablemente no sea la misma persona la que realice la
+  implementación y el mantenimiento.
+
+\item \textbf{Verbos.} Si los nombres de los objetos contienen un verbo, siempre
+  se tiene que iniciar la palabra con él. Por ejemplo es mejor decir
+  \texttt{Buscar\_Nombre\_Cliente} que \texttt{Nombre\_Cliente\_Buscar}.
+
+\item \textbf{Palabras simples.} Utilizar palabras simples para describir un
+  objeto. Usar \texttt{Buscar\_Complemento} o sólo \texttt{Complemento} en lugar
+  de \texttt{Buscar\_Y\-\_Complementar}.
+
+\item \textbf{Expresiones cotidianas.} Las expresiones cotidianas no deben ser
+  usadas ya que pueden causar confusión al momento de leer o implementar.
+
+\item \textbf{Uso de formas singulares y plurales.} Las formas singulares son
+  más comunes que las plurales en el uso diario; son mas cortas y simples de
+  entender, por lo que es recomendable usarlas en lugar de las plurales. Como
+  una regla de consistencia, cuando se define el nombre de la base de datos se
+  puede utilizar la forma singular o plurar, pero no ambas.
+
+\item \textbf{Uso de abreviaciones.} Si es necesario tener que usar
+  abreviaciones, las siguientes recomendaciones nos pueden ayudar a definir una
+  buena abreviación (tomaremos como ejemplo la palabra \texttt{ERROR}).
+
+  \begin{itemize}
+
+  \item Obtener todas las consonantes o caracteres especiales de la palabra
+    (\texttt{ERROR} sería \texttt{RRR}).
+
+  \item Si la palabra original comienza con vocal, mantener la vocal en su lugar
+    (\texttt{ERROR} sería \texttt{ERRR}).
+
+  \item Si la regla antes descrita resulta en una abreviación que contiene más
+    de dos consonantes idénticas, solo dos consonantes deben permanecer
+    (\texttt{ERROR} sería \texttt{ERR}).
+
+  \item Si el resultado de la abreviación es díficil de entender, usar una
+    abreviación que sea más comprensible. Por ejemplo usar \texttt{PROD} para
+    describir producto en lugar de \texttt{PRDCT}.
+
+  \end{itemize}
+
 \end{itemize}
-
-
-
-
-\end{itemize}
-
 
 \cleardoublepage
 
