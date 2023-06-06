@@ -10,15 +10,16 @@ dependencias de los sistemas origen con otros procesos, tareas o reglas de
 negocio dentro de la organización, así como la frecuencia esperada o deseada de
 la extracción de datos. La extracción de datos se realizó con una periodicidad
 diaria; esto debido a que al tratarse del sistema principal de la institución
-financiera la información se actualizaba de manera diaria. La herramienta ETL
-nos permitió identificar aquellas tablas y campos que sufrían modificaciones, de
-tal forma que se extrajo sólo la información que sufría cambios a lo largo del
-día. La extracción de datos se realizó en un horario no operativo, a fin de no
-afectar la operación de la institución; además este proceso dependía del termino
-del proceso de cierre diario de operaciones. Solamente una vez que el proceso
-hubiera terminado comenzaba la extracción por parte de la herramienta ETL; este
-proceso contaba con una ventana de procesamiento de 5 horas. La extracción fue
-almacenada en la base de datos temporal dentro de la herramienta ETL.
+financiera la información se actualizaba con esa periodicidad. La herramienta
+ETL nos permitió identificar aquellas tablas y campos que sufrían
+modificaciones, de tal forma que se extrajo sólo la información que sufría
+cambios a lo largo del día. La extracción de datos se realizó en un horario no
+operativo, a fin de no afectar la operación de la institución; además este
+proceso dependía del termino del proceso de cierre diario de
+operaciones. Solamente una vez que el proceso hubiera terminado comenzaba la
+extracción por parte de la herramienta ETL; este proceso contaba con una ventana
+de procesamiento de 5 horas. La extracción fue almacenada en la base de datos
+temporal dentro de la herramienta ETL.
 
 \subsection{Extracción inicial}
 
@@ -26,7 +27,7 @@ En la extracción inicial se realizaron las siguientes transformaciones:
 
 \begin{itemize}
 \item Transformación de fecha juliana a fecha gregoriana.
-\item Cambio en los tipos de dato al momento de almacenarlos en la tabla
+\item Cambio en los tipos de datos al momento de almacenarlos en la tabla
   temporal; principalmente transformación del tipo de dato \textit{char} al tipo
   de dato \textit{varchar} y los datos numéricos a decimal.
 \end{itemize}
@@ -54,18 +55,19 @@ condiciones para realizar la extracción completa fueron las siguientes:
 
 \subsection{Relación entre las entidades de datos}
 
-En el siguiente diagrama se puede visualizar la relación entre las diferentes
-entidades y los datos que comparten cada uno de ellos.
+En la figura~\ref{fig:datos-relacionados-en-las-entidades} se puede visualizar
+la relación entre las diferentes entidades y los datos que comparten cada uno de
+ellos.
 
 \begin{figure}[htb]
   \begin{center}
-    \includegraphics[width=12cm, height=3cm, scale=0.5]{Relacion_entidades.jpg}
+    \includegraphics[width=\linewidth]{Relacion_entidades.jpg}
         \caption{Datos relacionados en las entidades.}
     \label{fig:datos-relacionados-en-las-entidades}
   \end{center}
 \end{figure}
 
-En la imagen podemos observar que los diferentes sistemas manejan el mismo tipo
+En la misma podemos observar que los diferentes sistemas manejan el mismo tipo
 de información; socios, cuentas, créditos y saldos.
 
 \section{Diseño para la transformación de datos}
@@ -75,12 +77,13 @@ entre los cuales se encuentra la limpieza de datos, los estándares y
 procedimientos utilizados, así como las reglas de transformación definidas para
 cada uno de los sistemas destino. La transformación de los datos se realizó
 dentro de la misma base de datos de paso y se almacenó en otra instancia de esta
-misma base de datos. El siguiente diagrama muestra como se realizaron las
-transformaciones requeridas.
+misma base de datos. La
+figura~\ref{fig:transformaciones-en-base-de-datos-temporal} muestra cómo se
+realizaron las transformaciones requeridas.
 
 \begin{figure}[htb]
   \begin{center}
-    \includegraphics[width=12cm, height=3cm, scale=0.5]{Transformaciones_stage.jpg}
+    \includegraphics[width=0.7\linewidth]{Transformaciones_stage.jpg}
     \caption{Transformaciones en base de datos temporal.}
     \label{fig:transformaciones-en-base-de-datos-temporal}
   \end{center}
@@ -116,13 +119,13 @@ siguientes criterios:
 
 \item El RFC de los socios debería ser de 10 o 13 posiciones para las personas
   físicas y 12 posiciones para las personas morales. En caso de no contar con un
-  RFC valido, el registro era rechazado y enviado a una tabla de auditoria para
+  RFC valido, el registro era rechazado y enviado a una tabla de auditoría para
   su corrección dentro del sistema fuente de parte del área de tecnología de la
   compañía.
 
 \item Todos los códigos postales debían ser de cinco dígitos, en caso de existir
   algún registro con mayor o menor número, estos debían de ser enviados a una
-  tabla de auditoria para su corrección dentro del sistema fuente. Se consideró
+  tabla de auditoría para su corrección dentro del sistema fuente. Se consideró
   una homologación de datos para los códigos de ciudades y estados. Todos los
   códigos de estados se homologaron a tres dígitos que corresponden a las tres
   primeras letras de cada estado; se realizó una excepción para el caso de
@@ -139,7 +142,8 @@ Para realizar una estandarización de los datos se creó una base de datos
 temporal que contenía la información de todos los campos con los mismos datos
 pero que su sistema origen era diferente. La creación de esta tabla temporal fue
 crear la base para generar una tabla de referencias cruzadas que representara un
-gobierno de datos o MDM (Master Data Management) por sus siglas en Inglés
+gobierno de datos o MDM (\emph{Master Data Management}) por sus siglas en
+inglés.
 
 \subsection{Reglas utilizadas para la transformación de datos}
 
@@ -150,12 +154,12 @@ siguientes transformaciones.
 \item Transformación de fechas julianas a fechas gregorianas en formato
   \linebreak \mbox{yyyy/mm/dd}.
 \item Transformación de los tipos de dato origen a los tipos de la base de
-  datos stage generada en SQL Server.
+  datos \emph{stage} generada en SQL Server.
 \end{itemize}
 
 Los procesos de transformación para cada destino fueron diferentes debido a las
 características de cada uno de los archivos de salida. Dichas transformaciones
-se realizaron tomando como principal fuente de datos, la base de datos temporal.
+se realizaron tomando como principal fuente de datos la base de datos temporal.
 
 \subsubsection{Sistema de reportes}
 
@@ -167,37 +171,85 @@ se realizaron tomando como principal fuente de datos, la base de datos temporal.
   fecha de vencimiento de la tabla de facturación. La regla de transformación
   que se definió fue la siguiente:
 
+{\footnotesize
 \begin{verbatim}
-FEC_VENCIMIENTO_5_D = CAST(RIGHT(LTRIM(RTRIM(FEC_VENCIMIENTO_5)),2) +
-        LEFT(RIGHT(LTRIM(RTRIM(FEC_VENCIMIENTO_5)),4), 2) +
-        REPLICATE('0', 2-len(LEFT(LTRIM(RTRIM(FEC_VENCIMIENTO_5)),
-        ABS(4-len(LTRIM(RTRIM(FEC_VENCIMIENTO_5))))))) +
-        LEFT(LTRIM(RTRIM(FEC_VENCIMIENTO_5)),
-        ABS(4-len(LTRIM(RTRIM(FEC_VENCIMIENTO_5))))) AS DATETIME)
-        WHERE  FEC_VENCIMIENTO_5 > 0
+FEC_VENCIMIENTO_5_D = CAST(
+  RIGHT(
+    LTRIM(
+      RTRIM(
+        FEC_VENCIMIENTO_5)
+      ), 2
+    ) +
+    LEFT(
+      RIGHT(
+        LTRIM(
+          RTRIM(
+            FEC_VENCIMIENTO_5
+          )
+        ), 4
+      ), 2
+    ) +
+    REPLICATE(
+      '0', 2 - (
+        LEFT(
+          LTRIM(
+            RTRIM(
+              FEC_VENCIMIENTO_5
+            )
+          ),
+          ABS(
+            4 - len(
+              LTRIM(
+                RTRIM(
+                  FEC_VENCIMIENTO_5
+                )
+              )
+            )
+          )
+        )
+      )
+    ) +
+    LEFT(
+      LTRIM(
+        RTRIM(
+          FEC_VENCIMIENTO_5
+        )
+      ),
+      ABS(
+        4 - len(
+          LTRIM(
+            RTRIM(
+              FEC_VENCIMIENTO_5
+            )
+          )
+        )
+      )
+    ) AS DATETIME
+  ) WHERE FEC_VENCIMIENTO_5 > 0
 \end{verbatim}
+}
 
-\item Para el campo Fecha de último saldo se tomó la fecha de vencimiento más
+\item Para el campo de fecha de último saldo se tomó la fecha de vencimiento más
   antigua que se tenía.
 \item Para obtener el número de créditos de un socio se realizó la siguiente
   regla.
 
 \begin{verbatim}
-        NO_CREDITOS =  NO_CREDITOS
-        WHERE  NO_SOCIO IN NO_SOCIO de la tabla CIF_CREDITOS.
-        Si NO_CREDITOS = NULL Entonces NO_CREDITOS = 0
+  NO_CREDITOS =  NO_CREDITOS
+    WHERE NO_SOCIO IN NO_SOCIO de la tabla CIF_CREDITOS.
+  Si NO_CREDITOS = NULL Entonces NO_CREDITOS = 0
 \end{verbatim}
 
 \item La descripción de la información correspondiente a las garantías debía
-  de estar vacío en la tabla destino.
+  de estar vacía en la tabla destino.
 
 \item Para almacenar la fecha de último monto con saldo se tomó la fecha de
   vencimiento más antigua que se tenía para cada registro dentro de la tabla de
-  saldos \textit{LN\_SALDOS.}
+  saldos LN\_SALDOS.
 
-\item Se realizó una validación sobre el tipo de cuenta para confirmar su
-  valor $=$ 1 $($Personas físicas$)$ o 6; en estos casos se colocó un valor 20
-  dentro del campo Tipo\_producto de la tabla TA\_SALDOS.
+\item Se realizó una validación sobre el tipo de cuenta para confirmar su valor
+  igual a 1 (Personas físicas) o 6; en estos casos se colocó un valor 20 dentro
+  del campo Tipo\_producto de la tabla TA\_SALDOS.
 
 \item El número de socio para poblar la tabla TA\_SALDOS se obtuvo de la
   tabla de cuentas por socio, pero solamente de aquellas cuentas cuyo tipo de
@@ -209,7 +261,7 @@ FEC_VENCIMIENTO_5_D = CAST(RIGHT(LTRIM(RTRIM(FEC_VENCIMIENTO_5)),2) +
 
 \item Se insertó el número de socio dentro de la tabla TA\_CTAXSOCIO para
   aquellos números de cuenta menores a 20000000000 y cuya clave de relación
-  fuera 'SOW' u 'OWN'. El número de socio eran los 10 dígitos de la derecha de
+  fuera `SOW' u `OWN'. El número de socio eran los 10 dígitos de la derecha de
   cada número de cuenta.
 
 \item Se definió que para el campo descripción perteneciente a la tabla
@@ -217,7 +269,7 @@ FEC_VENCIMIENTO_5_D = CAST(RIGHT(LTRIM(RTRIM(FEC_VENCIMIENTO_5)),2) +
   campo del cuál se extraía la información.
 
 \item El campo Periodo de la tabla LN\_SALDOS se asignó con un valor fijo =
-  'M'.
+  `M'.
 
 \item El campo frecuencia de la tabla LN\_SALDOS se asignó con un valor fijo
   $=$ 30.
@@ -225,6 +277,7 @@ FEC_VENCIMIENTO_5_D = CAST(RIGHT(LTRIM(RTRIM(FEC_VENCIMIENTO_5)),2) +
 \end{itemize}
 
 La regla de transformación que se utilizó durante la extracción.
+% Esto no compila.
 
 \subsubsection{Reglas para el sistema para prevención de lavado de dinero}
 
@@ -234,9 +287,9 @@ Las reglas definidas para este sistema son las siguientes:
 \item Se definieron algunos valores estáticos para los tres primeros campos de
   cada uno de los archivos generados; estos valores son los siguientes:
 \begin{enumerate}
-\item Valor fijo 'CMPS' para el primer campo.
-\item Valor fijo 'T' para el segundo campo.
-\item Valor fijo 'F' para el tercer campo.
+\item Valor fijo `CMPS' para el primer campo.
+\item Valor fijo `T' para el segundo campo.
+\item Valor fijo `F' para el tercer campo.
 \end{enumerate}
 \item Para la generación del archivo de cuentas se tomaron sólo aquellas
   cuentas que tuvieron movimientos durante el día.
@@ -249,8 +302,8 @@ Las reglas definidas para este sistema son las siguientes:
 
 \section{Arquitectura aplicativa}
 
-La arquitectura aplicativa requerida para un proceso de Extracción,
-Transformación y carga de datos está comprendida por una herramienta ETL y
+La arquitectura aplicativa requerida para un proceso de extracción,
+transformación y carga de datos está comprendida por una herramienta ETL y
 algunos componentes de software adicionales para lograr la integración de la
 solución.
 
@@ -272,63 +325,88 @@ Del marco de trabajo (\emph{framework}) de aplicaciones por lotes encontramos
 las siguientes capas principales:
 
 \begin{itemize}
-\item Ejecución
-\item Proceso por lotes
-\item Aplicaciones por lotes
-\item Negocios
-\item Datos
+\item Ejecución.
+\item Proceso por lotes.
+\item Aplicaciones por lotes.
+\item Negocios.
+\item Datos.
 \end{itemize}
 
-El marco de trabajo comprende componentes que brindan servicios a las capas principales de la cuales son:
+El marco de trabajo comprende componentes que brindan servicios a las capas
+principales de la cuales son:
 
 \begin{itemize}
-\item Servidores de aplicación
-\item Flujos de trabajo de usuarios
-\item Captura de datos
-\item Servicios por lotes
-\item Servicios de reportes
-\item Servicios de gestión
-\item Servicios de seguridad
-\item Servicios comunes
+\item Servidores de aplicación.
+\item Flujos de trabajo de usuarios.
+\item Captura de datos.
+\item Servicios por lotes.
+\item Servicios de reportes.
+\item Servicios de gestión.
+\item Servicios de seguridad.
+\item Servicios comunes.
 \end{itemize}
 
-En las siguientes secciones se describirá la responsabilidad de cada una de las capas.
+En las siguientes secciones se describirá la responsabilidad de cada una de las
+capas.
 
 \subsection{Componentes de la capa de presentación}
-Dentro de la capa de presentación se tienen varios componentes entre ellos el panel de consulta y la interfaz de usuario que nos ayuda a la revisión y monitoreo del proceso por lotes; así como los resultados que este arroja.
+
+Dentro de la capa de presentación se tienen varios componentes entre ellos el
+panel de consulta y la interfaz de usuario que nos ayuda a la revisión y
+monitoreo del proceso por lotes; así como los resultados que éste arroja.
 
 \subsection{Servicios de la capa de presentación}
-Los servicios que brindan los componentes de esta capa de a acuerdo al marco de trabajo utilizado son los siguientes:
+
+Los servicios que brindan los componentes de esta capa de a acuerdo al marco de
+trabajo utilizado son los siguientes:
 
 \begin{enumerate}
-\item Monitoreo de programa
-\item Reportes
-\item Servivios comunes
+\item Monitoreo de programa.
+\item Reportes.
+\item Servivios comunes.
 \end{enumerate}
 
 \subsubsection{Monitoreo de programas}
-Este servicio proporciona la herramientas para monitorear cuales programas y aplicaciones están siendo ejecutados, así como la información a nivel sistema del uso de recursos. El monitoreo de programas puede actuar como entrada principal en las decisiones de balanceo de cargas
+
+Este servicio proporciona las herramientas para monitorear cuáles programas y
+aplicaciones están siendo ejecutados, así como la información a nivel sistema
+del uso de recursos. El monitoreo de programas puede actuar como entrada
+principal en las decisiones de balanceo de cargas.
 
 \subsubsection{Reportes}
-Reportes permite al usuario dar formato a los resultados de una consulta dentro de la producción de reportes de calidad. 
+
+Reportes permiten al usuario dar formato a los resultados de una consulta dentro
+de la producción de reportes de calidad.
 
 \subsection{Componentes de la capa de ejecución}
-Los componentes encontrados en esta capa de acuerdo al marco utilizado son los siguientes:
+
+Los componentes encontrados en esta capa de acuerdo al marco utilizado son los
+siguientes:
 
 \begin{itemize}
-\item Calendarizador de tareas (\emph{Scheduler})
-\item Script de ejecución de programas.
+\item Calendarizador de tareas (\emph{scheduler}).
+\item \emph{Script} de ejecución de programas.
 \end{itemize}
 
-Los componentes de esta capa son los encargados de comenzar con el proceso de ejecución y se describen a continuación:
+Los componentes de esta capa son los encargados de comenzar con el proceso de
+ejecución y se describen a continuación:
 
 \subsubsection{Calendarizador}
 
-El servicio de calendarización proporciona la estructura de control para programas por lotes; esto es, administra el flujo de su procesamiento. Un proceso de calendarización debe de proporcionar una interfaz de usuario para entrar y dar mantenimiento a la información y a la calendarización de los procesos por lotes.
+El servicio de calendarización proporciona la estructura de control para
+programas por lotes; esto es, administra el flujo de su procesamiento. Un
+proceso de calendarización debe de proporcionar una interfaz de usuario para
+entrar y dar mantenimiento a la información y a la calendarización de los
+procesos por lotes.
 
-\subsubsection{Scripts de ejecución de programas}
+\subsubsection{\emph{Scripts} de ejecución de programas}
 
-Este servicio es responsable de establecer y restaurar el ambiente en el cuál el proceso por lotes es ejecutado; también, debe ser capaz de ser ejecutado por el calendarizador así como recibir y/o enviar parámetros del calendarizador al proceso por lotes, tales como el nombre del proceso a ser ejecutado. El script debe proporcionar los procedimientos y guía necesarios para ejecutar el proceso por lotes.
+Este servicio es responsable de establecer y restaurar el ambiente en el cuál el
+proceso por lotes es ejecutado; también debe ser capaz de ser ejecutado por el
+calendarizador así como recibir y/o enviar parámetros del calendarizador al
+proceso por lotes, tales como el nombre del proceso a ser ejecutado. El
+\emph{script} debe proporcionar los procedimientos y guía necesarios para
+ejecutar el proceso por lotes.
 
 \section{Arquitectura de negocio}
 
@@ -340,25 +418,26 @@ Como se explicó en los capítulos anteriores, la institución financiera contab
 con diferentes procesos ETL que extraían información del sistema
 principal. Estos sistemas trabajaban de manera independiente por lo que cada
 sistema destino tenía su base de datos temporal antes de enviarla a su
-destino. La arquitectura se encuentra detallada en el siguiente diagrama:
+destino. La arquitectura se encuentra detallada en la
+figura~\ref{fig:arquitectura-de-datos-actual}.
 
 \begin{figure}[htb]
   \begin{center}
-    \includegraphics[width=12cm, height=3cm, scale=0.5]{Arquitecturadatos_actual.jpg}
+    \includegraphics[width=0.8\linewidth]{Arquitecturadatos_actual.jpg}
     \caption{Arquitectura de datos actual.}
     \label{fig:arquitectura-de-datos-actual}
   \end{center}
 \end{figure}
 
-Como se observa en la imagen anterior, existían muchas bases de datos
-intermedias entre la fuente de datos y los sistemas destino; la arquitectura
-definida dentro de este proyecto, nos permite tener una sola base de datos
-temporal, así como una sola capa de integración de datos. El siguiente diagrama
-muestra el diseño de la arquitectura desarrollada:
+Como se observa en la figura~\ref{fig:arquitectura-de-datos-actual}, existían
+muchas bases de datos intermedias entre la fuente de datos y los sistemas
+destino; la arquitectura definida dentro de este proyecto, nos permite tener una
+sola base de datos temporal, así como una sola capa de integración de datos. El
+siguiente diagrama muestra el diseño de la arquitectura desarrollada:
 
 \begin{figure}[htb]
   \begin{center}
-    \includegraphics[width=12cm, height=3cm, scale=0.5]{Arquitectura_final.jpg}
+    \includegraphics[width=0.8\linewidth]{Arquitectura_final.jpg}
     \caption{Arquitectura de datos final.}
     \label{fig:arquitectura-de-datos-final}
   \end{center}
