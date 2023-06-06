@@ -34,7 +34,7 @@ construcción de la base de datos se enlistan a continuación:
 
 \item En cada construcción de consultas, se verificó siempre los planes de
   ejecución; es decir, reducir al máximo el uso de memoria y capacidad de las
-  máquinas. Además evitar que las consultas repondieran con escaneo de índices
+  máquinas. Además evitar que las consultas respondieran con escaneo de índices
   (\texttt{index scan}) o escaneo de tablas (\texttt{table scan}).
 
 \item Evitar el uso del enunciado \texttt{WHERE ... IN} y utilizar \texttt{WHERE
@@ -59,7 +59,7 @@ construcción de la base de datos se enlistan a continuación:
 \item Mantener los enunciados SQL lo más concisos posibles.
 
 \item Para el proceso de carga masiva de datos, se recomendó borrar primero los
-  índices antes de iniciar la carga, reconstruyéndolos al final del proceeso.
+  índices antes de iniciar la carga, reconstruyéndolos al final del proceso.
 
 \item Siempre comentar el código generado.
 
@@ -105,7 +105,7 @@ de datos.
 \item \textbf{Palabras reservadas.} No estaba permitido el uso de palabras
   reservadas.
 
-\item \textbf{Separadores.} Uso del caracter `\texttt{\_}' para nombres de
+\item \textbf{Separadores.} Uso del carácter `\texttt{\_}' para nombres de
   objetos de base de dato que estuvieran compuestos de varias palabras. No usar
   `\texttt{\_}' en el nombre de la base de datos.
 
@@ -148,7 +148,7 @@ algunas de sus recomendaciones.
   más comunes que las plurales en el uso diario; son mas cortas y simples de
   entender, por lo que es recomendable usarlas en lugar de las plurales. Como
   una regla de consistencia, cuando se define el nombre de la base de datos se
-  puede utilizar la forma singular o plurar, pero no ambas.
+  puede utilizar la forma singular o plural, pero no ambas.
 
 \item \textbf{Uso de abreviaciones.} Si es necesario tener que usar
   abreviaciones, las siguientes recomendaciones nos pueden ayudar a definir una
@@ -166,7 +166,7 @@ algunas de sus recomendaciones.
     de dos consonantes idénticas, solo dos consonantes deben permanecer
     (\texttt{ERROR} sería \texttt{ERR}).
 
-  \item Si el resultado de la abreviación es díficil de entender, usar una
+  \item Si el resultado de la abreviación es difícil de entender, usar una
     abreviación que sea más comprensible. Por ejemplo usar \texttt{PROD} para
     describir producto en lugar de \texttt{PRDCT}.
 
