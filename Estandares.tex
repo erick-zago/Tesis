@@ -37,8 +37,8 @@ construcción de la base de datos se enlistan a continuación:
   máquinas. Además evitar que las consultas respondieran con escaneo de índices
   (\texttt{index scan}) o escaneo de tablas (\texttt{table scan}).
 
-\item Evitar el uso del enunciado \texttt{WHERE ... IN} y utilizar \texttt{WHERE
-    EXIST}.
+\item Evitar el uso del enunciado \texttt{WHERE \ldots{} IN} y utilizar
+  \texttt{WHERE EXIST}.
 
 \item Evitar el uso del \texttt{OR} y sustituirlo por otro tipo de consulta o
   por el enunciado \texttt{CASE}.
@@ -173,103 +173,215 @@ algunas de sus recomendaciones.
   \end{itemize}
 
 \end{itemize}
-\section{Nombres estándar de base de datos}
-Parte importante dentro de la programación, son los nombres de base de datos; a continuación se definen algunas recomendaciones que se deben seguir 
-para tener la información en nuestro sistema de una forma entendible y fácil de leer.
 
-\subsubsection{Estándares para la creación de un modelo lógico}
-\textbf{Atributos}
+\section{Nombres estándar para la base de datos}
+
+Parte importante dentro de la programación son los nombres usados en la base de
+datos; a continuación se definen algunas recomendaciones que se deben seguir
+para tener la información en nuestro sistema de una forma entendible y fácil de
+leer.
+
+\subsection{Estándares para la creación de un modelo lógico}
+
+\subsubsection{Atributos}
+
 \begin{enumerate}
-\item Todos los nombres lógicos deben ser expresados en términos de negocio con las siguientes excepciones:
-\begin{itemize}
-\item Acrónimos de negocio similares pueden ser usados de manera limitada.
-\item El identificador \texttt{ID} debe ser usado siempre para identificadores.
-\end{itemize}
+
+\item Todos los nombres lógicos deben ser expresados en términos de negocio con
+  las siguientes excepciones:
+
+  \begin{itemize}
+  \item Acrónimos de negocio similares pueden ser usados de manera limitada.
+  \item El nombre \texttt{ID} debe ser usado siempre para identificadores.
+  \end{itemize}
 
 \item Todos los nombres deben de iniciar con letra mayúscula.
+
 \item Todos los nombres son singulares.
+
 \item Las entidades deben de ser únicas dentro del modelo.
-\item No se deben de usar abreviaciones al menos que sea requerido por consideraciones de espacio y se deberán seguir las recomendaciones de la sección anterior.
-\item Los nombres deben de consistir e iniciar con caracteres alfabéticos. Los números no son recomendables pero pueden ser usados en caso de ser requeridos. Caracteres especiales no deben de ser usados.
-\item Múltiples términos en el nombre deben de estar separados por espacio, las diagonales o guiones no pueden ser usadas.
+
+\item No se deben usar abreviaciones al menos que sea requerido por
+  consideraciones de espacio y se deberán seguir las recomendaciones de la
+  sección anterior.
+
+\item Los nombres deben de consistir e iniciar con caracteres alfabéticos. Los
+  números no son recomendables pero pueden ser usados después del inicio en caso
+  de ser requeridos. Caracteres especiales no deben de ser usados.
+
+\item Múltiples términos en el nombre deben estar separados por espacio, las
+  diagonales o guiones no pueden ser usados.
+
 \end{enumerate}
 
-\textbf{Entidades}
+\subsubsection{Entidades}
+
 \begin{enumerate}
+
 \item Un nombre de entidad debe ser un nombre o una frase en forma singular.
-\item Todos los nombres de entidades son nombres de negocio y pueden terminar en una palabra que los clasifique.
-\item Entidades asociadas deben ser creadas usando un nombre con un significado de negocio en lugar de la concatenación de 2 entidades. 
-\iteem La entidad asociada debe ser sufijo con una abreviación para la referencia cruzada.
+
+\item Todos los nombres de entidades son nombres de negocio y pueden terminar en
+  una palabra que los clasifique.
+
+\item Entidades asociadas deben ser creadas usando un nombre con un significado
+  de negocio en lugar de la concatenación de 2 entidades.
+
+\item La entidad asociada debe ser sufijo con una abreviación para la referencia
+  cruzada.
+
 \end{enumerate}
 
-\textbf{Relaciones}
-Todas las relaciones tienen significado de una frase verbal y deben estar en minúsculas.
+\subsubsection{Relaciones}
 
-\textbf{Definiciones}
-Las definiciones deben ser una frase detallada de los atributos qeu típicamente contiene referencias al suijeto componente del atributo. La definición debe consistir de varios enunciados qeu describan concisamente los datos. Ejemplos de datos deben proporcionarse siempre que sea posible. 
+Todas las relaciones tienen significado de una frase verbal y deben estar en
+minúsculas.
 
-\textbf{Propiedades definidas por el usuario}
-Para todos los objetos, los comentarios deben ser proporcionados en las propiedades definidas por el usuario. Las funciones definidas por el usuario \texttt{(UDF)} son muy similares a los procedimientos almacenados con la diferencia de que estos pueden ser usados en las sentencias \texttt{SELECT}; si no fuera así, tanto los procedimientos almacenados como las funciones definidas por el usuario serían iguales. Las funciones definidas por el usuario deberán de tener el sufijo \texttt{_udf}.
+\subsubsection{Definiciones}
 
-\subsubsection{Estándares para la creación de un modelo físico}
-\textbf{Nombre de tablas:}
-La regla principal para crear los nombres de tablas físicas deben estar basadas en los nombres de las tablas descritas en los estándares del modelo lógico visto en la sección anterior con excepción de las siguientes reglas:
-\begin{itemize}
-\item El guión bajo reemplazará a los espacios que dividen los términos en el nombre.
-\item Uso de términos estándar apropiados. Los nombres deben ser amigables al usuario y consistentes con el mismo termino utilizado por el modelo lógico.
-\item Los nombres no deben de contener palabras reservadas propias de la base de datos como: \texttt{type}, \texttt{name}, \texttt{column}, \texttt{row}, etc.
-\item No se deben usar acentos ni la letra \texttt{ñ}
-\end{itemize}
+Las definiciones deben ser una frase detallada de los atributos que típicamente
+contiene referencias al sujeto componente del atributo. La definición debe
+consistir de varios enunciados que describan concisamente los datos. Ejemplos de
+datos deben proporcionarse siempre que sea posible.
 
-\textbf{Nombres de elementos de las tablas}
-Los fundamentos para crear los nombres de los elementos físicos de la base de datos deben de estar basados en los nombres de los atributos de negocio definidos en los estándares para el modelo lógico con las siguientes excepciones:
+\subsubsection{Propiedades definidas por el usuario}
 
-\begin{itemize}
-\item El carácter \texttt{_} reemplazará a los espacios que separan los términos en el nombre
-\item Uso de términos estándar apropiados. Los nombres deben de ser amigables al usuario y consistentes con el mismo termino utilizado en la definición del modelo lógico.
-\item Las llaves técnicas o subrogadas deben tener el sufijo \texttt{_TK}.
-\item Los nombres de los constrains deben ser llamados de la siguiente forma:
-\begin{itemize}
-\item \texttt{Nombretabla} es el nombre de la tabla para el cual es constrain aplica
-\item \texttt{tipo}, identifica el tipo de constrain y solamente puede ser una de las siguientes opciones:
-\begin{itemize}
-\item \texttt{pk}, llave primaria.
-\item \texttt{fk}, llave foránea.
-\item \texttt{c}, validar constrain.
-\end{itemize}
-\item \texttt{desc}, información adicional correspondiente al nombre de las columnas usadas en el constrain o a su uso. 
-\end{itemize}
-\end{itemize}
+Para todos los objetos, los comentarios deben ser proporcionados en las
+propiedades definidas por el usuario. Las funciones definidas por el usuario
+(\texttt{UDF}) son muy similares a los procedimientos almacenados con la
+diferencia de que estos pueden ser usados en los enunciados \texttt{SELECT}; si
+no fuera así, tanto los procedimientos almacenados como las funciones definidas
+por el usuario serían iguales. Las funciones definidas por el usuario deberán de
+tener el sufijo \texttt{\_udf}.
 
-\textbf{Restricciones \texttt{Default} y \texttt{Check}}
-Se debe de usar el nombre de la columna a la cuál la restricción está unida y colocar un sufijo \texttt{def} y \texttt{chk} respectivamente.
+\subsection{Estándares para la creación de un modelo físico}
 
-\textbf{Nombres de procedimientos almacenados}
-Los procedimientos almacenados realizan la tarea por el usuario por lo que es bueno seguir una serie de reglas para la definición de los nombres. Las reglas que se deberán seguir son las siguientes:
+\subsubsection{Nombre de tablas}
+
+La regla principal para crear los nombres de tablas físicas es que deben estar
+basadas en los nombres de las tablas descritas en los estándares del modelo
+lógico visto en la sección anterior, con excepción de las siguientes reglas.
 
 \begin{itemize}
-\item Usar la siguiente nomenclatura para nombrar a los procedimientos almacenados: \texttt{sp_x_yyyyyy}; donde:
-\texttt{sp}    es un prefijo que denota que se trata de un procedimiento almacenado.
-\texttt{x}     prefijo que denota el tipo de procedimiento almacenado a ejecutar.
-d   procedimiento de borrado.
-i   procedimiento de inserción.
-s   procedimiento de selección.
-u   prodecimiento de actualización.
-x   procedimiento que combina inserción, selección y actualización.
-\texttt{yyyyyy}   descripción del procedimiento almacenado.
-\item Usar un verbo para describir la acción del procedimiento almacenado.
-\item Opcionamente se puede usar un prefijo que agrupe los procedimientos almacenados de una misma tabla.
+
+\item El guión bajo reemplazará a los espacios que dividen los términos en el
+  nombre.
+
+\item Uso de términos estándar apropiados. Los nombres deben ser amigables al
+  usuario y consistentes con el mismo término utilizado por el modelo lógico.
+
+\item Los nombres no deben de contener palabras reservadas propias de la base de
+  datos como: \texttt{type}, \texttt{name}, \texttt{column}, \texttt{row}, etc.
+
+\item No se deben usar acentos, diéresis ni la letra \texttt{ñ}.
+
 \end{itemize}
 
-\textbf{Variables}
-Para variables que almacenan el contenido de las columnas, se puede utilizar la misma regla que utilizamos para nombrar columnas. A continuación se describen las reglas generales:
+\subsubsection{Nombres de elementos de las tablas}
+
+Los fundamentos para crear los nombres de los elementos físicos de la base de
+datos deben de estar basados en los nombres de los atributos de negocio
+definidos en los estándares para el modelo lógico con las siguientes
+excepciones:
 
 \begin{itemize}
-\item No definir nombres largos y complicados para las tablas u otros objetos de las bases de datos.
-\item No usar espacios en los nombres de los objetos de la base de datos ya que los espacios hacen confuso el acceso a las herramientas y aplicaciones de 
-la base de datos. En el caso obligatorio de tener que usar espacios, asegurarse de colocar el nomnbre dentro de corchetes.
-\item No usar palabras reservadas para nombrar objetos de base de datos, porque esto puede resultar en situaciones impredecibles.
+
+\item El carácter `\texttt{\_}' reemplazará a los espacios que separan los
+  términos en el nombre
+
+\item Uso de términos estándar apropiados. Los nombres deben de ser amigables al
+  usuario y consistentes con el mismo término utilizado en la definición del
+  modelo lógico.
+
+\item Las llaves técnicas o sustitutas deben tener el sufijo \texttt{\_TK}.
+
+\item Los nombres de las restricciones (\emph{constrains}) deben ser de la
+  siguiente forma:
+
+  \begin{itemize}
+
+  \item \texttt{Nombretabla} es el nombre de la tabla para el cual la
+    restricción aplica.
+
+  \item \texttt{tipo} identifica el tipo de restricción y solamente puede ser
+    una de las siguientes opciones:
+
+    \begin{itemize}
+    \item \texttt{pk}, llave primaria.
+    \item \texttt{fk}, llave foránea.
+    \item \texttt{c}, validar restricción.
+    \end{itemize}
+
+  \item \texttt{desc} es información adicional correspondiente al nombre de las
+    columnas usadas en la restricción o a su uso.
+
+  \end{itemize}
+
 \end{itemize}
+
+\subsubsection{Restricciones por omisión y de comprobación}
+
+Se debe de usar el nombre de la columna a la cuál la restricción está unida y
+colocar un sufijo \texttt{def} para restricciones por omisión (\emph{default}) y
+\texttt{chk} para restricciones de comprobación (\emph{check}) respectivamente.
+
+\subsubsection{Nombres de procedimientos almacenados}
+
+Los procedimientos almacenados (\emph{stored procedures}) realizan tareas por el
+usuario por lo que es bueno seguir una serie de reglas para la definición de los
+nombres. Las reglas que se deberán seguir son las siguientes:
+
+\begin{itemize}
+
+\item Usar la plantilla \texttt{sp\_x\_yyyyyy} para nombrar a los procedimientos
+  almacenados, donde:
+
+  \begin{itemize}
+
+  \item \texttt{sp} denota que se trata de un procedimiento almacenado.
+
+  \item \texttt{x} denota el tipo de procedimiento almacenado a ejecutar:
+
+    \begin{itemize}
+    \item \texttt{d} procedimiento de borrado.
+    \item \texttt{i} procedimiento de inserción.
+    \item \texttt{s} procedimiento de selección.
+    \item \texttt{u} procedimiento de actualización.
+    \item \texttt{x} procedimiento que combina inserción, selección y
+      actualización.
+    \end{itemize}
+
+  \item \texttt{yyyyyy} descripción del procedimiento almacenado.
+
+  \item Usar un verbo para describir la acción del procedimiento almacenado.
+
+  \item Opcionalmente se puede usar un prefijo que agrupe los procedimientos
+    almacenados de una misma tabla.
+
+  \end{itemize}
+
+\end{itemize}
+
+\subsubsection{Variables}
+
+Para variables que almacenan el contenido de las columnas, se puede utilizar la
+misma regla que utilizamos para nombrar columnas. A continuación se describen
+las reglas generales:
+
+\begin{itemize}
+
+\item No definir nombres largos y complicados para las tablas u otros objetos de
+  las bases de datos.
+
+\item No usar espacios en los nombres de los objetos de la base de datos ya que
+  los espacios hacen confuso el acceso a las herramientas y aplicaciones de la
+  base de datos. En el caso obligatorio de tener que usar espacios, asegurarse
+  de colocar el nombre dentro de corchetes.
+
+\item No usar palabras reservadas para nombrar objetos de base de datos, porque
+  esto puede resultar en situaciones impredecibles.
+
+\end{itemize}
+
 \cleardoublepage
 
 %%% Local Variables:
