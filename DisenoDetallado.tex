@@ -388,6 +388,7 @@ siguientes:
 \begin{itemize}
 \item Calendarizador de tareas (\emph{scheduler}).
 \item \emph{Script} de ejecución de programas.
+\item Proceso por lotes.
 \end{itemize}
 
 Los componentes de esta capa son los encargados de comenzar con el proceso de
@@ -410,9 +411,44 @@ proceso por lotes, tales como el nombre del proceso a ser ejecutado. El
 \emph{script} debe proporcionar los procedimientos y guía necesarios para
 ejecutar el proceso por lotes.
 
-\section{Arquitectura de negocio}
+\subsubsection{Proceso por lotes}
+Un proceso por lotes controla la ejecución de la aplicación. Un proceso por lotes es típicamente un script de ejecución que control el orden del proceso, nombres de archivos de entradas/salidas y dependencias entre procesos por lotes.
 
-% TODO
+\subsection{Servicios de la capa de trabajos programados (\emph{Jobs})
+Los servicios que soportan a los componentes de esta capa de acuerdo al framework utilizado son los siguientes:
+
+\begin{itemize}
+\item Reinicio / Recuperación.
+\item Trabajos particionados.
+\item Servicios comunes
+\end{itemize}
+
+\subsubsection{Reinicio / Recuperación}
+El servicio de reinicio y recuperación permite a los proceso programados apagarse y reiniciarse en puntos apropiados después de una interrupción anormal o de la intervención del usuario.
+
+\subsubsection{Trabajos particionados}
+Usando una partición, permite que múltiples versiones de aplicaciones programadas se ejecuten concurrentemente. El propósito de esto es reducir el tiempo transcurrido que se requiere para procesar la información.
+
+\section{Arquitectura de negocio}
+Esta capa se divide en 4 grandes módulos que contienen toda la lógica de negocio los suales son:
+\begin{enumerate}
+\item Extracción
+\Limpieza.
+\Transformación.
+\item Carga
+\end{enumerate}
+
+\subsection{Móduulo de extracción}
+Extracción es el proceso que consiste de los módulos que extraen los datos de una fuente(s) de datos determinada.  El módulo de extracción está formado de los siguientes componentes.
+\begin{enumerate}
+\item Monitor de tareas programadas.
+\item Monitor de \textit{Triggers}
+\item Adaptadores de funete de datos.
+\item Filtrado y busqueda de datos.
+\item Estandarización de tipos de tato
+
+\end{enumerate}
+
 
 \section{Arquitectura de datos}
 
