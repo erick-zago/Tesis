@@ -507,7 +507,35 @@ A lo largo del capítulo se especifican los componentes de hardware y software n
 \subsection{Ambiente de producción}
 Se describe a continuación las especificaciones de los servidores físicos requeridos.
 
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{|p{6cm}|>{\centering\arraybackslash}m{3cm}|c|}
+      \hline
+      Modelo & Servidor & Sistema Operativo &  Aplicaciones / Programas & Tipo base de datos\\
+      \hline
+      iSeries & ICBS PRO & OS / 400 &  & DB2 \\
+      \hline
+      Dell tipo rack & Informate PRO DB & Windows 2003 estándard & Configuration Manager SQL, aplicaciones web, reportes & \\
+      \hline
+      Dell tipo rack & Informate PRO DB & Windows 2003 estándard & Oracle DB2, SQL Server 2005 & SQL 2005\\
+      \hline
+      HP Proliant BL 460c G1 Tipo Blade & OCCAMPRO & Windows 2003 estándar & Visual estudio 2005, SQL server 2005, Apache tomcat, office 2003 & SQL 2005.\\
+      \hline
+    \end{tabular}
+    \caption{Infraestructura requerida.}
+    \label{tab:infraestructura requerida}
+ \end{center}
+\end{table}
 
+El diagrama de red de la infraestructura mencionada se muestra a continuación
+
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics[width=0.8\linewidth]{Infraestructura.jpg}
+    \caption{Infraestructura de aplicación.}
+    \label{fig:infraestructura}
+  \end{center}
+\end{figure}   
 
 \cleardoublepage
 
